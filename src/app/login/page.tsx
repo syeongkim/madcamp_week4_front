@@ -1,8 +1,8 @@
 'use client';
 
 import "./styles/login.css";
-import Logo from "./components/Logo";
-import Button from "./components/Button";
+import Logo from "../components/Logo";
+import Button from "../components/Button";
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
