@@ -118,9 +118,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Question from './components/Question';
-import Result from './components/Result';
-import Confused from './components/Confused';
+import Question from '../components/Question';
+import Result from '../components/Result';
+import Confused from '../components/Confused';
 import './styles/poll.css';
 
 const questions = [
