@@ -1,9 +1,61 @@
+.dorm-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 500px;
+}
+
 .dorm {
   font-family: 'Harry P';
-  font-size: 50px;
+  font-size: 70px;
   color: white;
-  border: 2px solid white;
-  border-radius: 10px;
-  height: 300px;
-  width: 400px;
+  text-align: center;
+  transition: color 0.3s ease; /* 부드러운 전환 효과 추가 */
+}
+
+.dorm-container:hover .dorm {
+  color: var(--hover-color); /* hover 시 색상 변경 */
+}
+
+.dormtype {
+  font-family: 'Harry P';
+  color: white;
+  font-size: 80px;
+  text-align: center;
+}
+
+.dorm-detail {
+  font-family: 'Animales Fantastic';
+  color: white;
+}
+
+.scrolling-names-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 50; /* 다른 요소 위에 위치시키기 위해 z-index 설정 */
+}
+
+.scrolling-names {
+  font-family: 'Animales Fantastic';
+  display: flex;
+  animation: scroll 10s linear infinite;
+  color: white;
+}
+
+.scrolling-names span {
+  padding-right: 2rem; /* 간격을 두기 위해 */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

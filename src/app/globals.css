@@ -7,6 +7,11 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   white-space: pre-wrap;
+
+  --color-gryffindor: #7C201C;
+  --color-hufflepuff: #E8CA27;
+  --color-ravenclaw: #3C6985;
+  --color-slytherin: #376E35;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,7 +29,12 @@
 
 @font-face {
   font-family: 'lumos';
-  src: url('/fonts/lumos.ttf'); /* Adjust the path to your font */
+  src: url('/fonts/LUMOS.ttf') format('truetype'); /* Adjust the path to your font */
+}
+
+@font-face {
+  font-family: 'Animales Fantastic';
+  src: url('/fonts/Animales Fantastic.otf') format('truetype'); /* Adjust the path to your font */
 }
 
 body {
@@ -35,4 +45,25 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* .scrolling-names {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: scroll 10s linear infinite;
+  }
+
+  .scrolling-names span {
+    padding-right: 2rem;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  } */
 }
+
