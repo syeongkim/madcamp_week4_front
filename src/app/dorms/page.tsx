@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import DormComponent from '../components/Dorm';
+import DormCard from '../components/DormCard';
 import './styles/dorms.css';
 
 const dorms = [
@@ -24,17 +24,17 @@ const dorms = [
 ];
 
 export default function Dorm() {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="grid grid-cols-2 gap-4">
-          {dorms.map((dorm, index) => (
-            <DormComponent
-              key={index}
-              color={dorm.color}
-              type={dorm.title}
-            />
-          ))}
-        </div>
+  return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="grid grid-cols-2 gap-4 flex justify-center items-center">
+        {dorms.map((dorm, index) => (
+          <DormCard
+            key={index}
+            color={dorm.color}
+            type={dorm.title}
+          />
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
+}
