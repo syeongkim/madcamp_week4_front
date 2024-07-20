@@ -10,9 +10,9 @@ export default function Login() {
         <div className="mb-6 text-center">
           <Logo />
         </div>
-        <form className="space-y-6 font-Animales text-white">
+        <form className="space-y-6 font-Animales">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium">
+            <label htmlFor="username" className="block text-sm font-medium text-white">
               Username
             </label>
             <input
@@ -25,7 +25,7 @@ export default function Login() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium">
+            <label htmlFor="password" className="block text-sm font-medium text-white">
               Password
             </label>
             <input
@@ -45,14 +45,14 @@ export default function Login() {
                 type="checkbox"
                 className="h-4 w-4 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label htmlFor="remember_me" className="ml-2 block text-sm">
+              <label htmlFor="remember_me" className="ml-2 block text-sm text-white">
                 Remember me
               </label>
             </div>
           </div>
           <div>
             <Link href="/dorms">
-              <Button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <Button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600">
                 Sign in
               </Button>
             </Link>
