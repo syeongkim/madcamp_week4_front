@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { TextureLoader } from 'three';
 import * as THREE from 'three';
+import { SimplexNoise } from 'three/examples/jsm/Addons.js';
 
 import '../../globals.css';
 import '../styles/dorms.css';
@@ -45,6 +46,7 @@ function Banner({ texturePath }: { texturePath: string }) {
   const texture = useLoader(TextureLoader, texturePath);
   const bannerRef = useRef<THREE.Mesh>(null);
   const [aspect, setAspect] = useState(1);
+  const simplex = useRef(new SimplexNoise({ random: Math.random }));
 
   useEffect(() => {
     const img = new Image();
@@ -57,8 +59,12 @@ function Banner({ texturePath }: { texturePath: string }) {
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     if (bannerRef.current) {
-      bannerRef.current.rotation.z = 0.05 * Math.sin(t);
-      bannerRef.current.rotation.x = 0.05 * Math.cos(t);
+        const xNoise = simplex.current.noise(t * 0.1, 0);
+        const yNoise = simplex.current.noise(t * 0.1, 1);
+        const zNoise = simplex.current.noise(0, t * 0.1);
+        bannerRef.current.rotation.x = 0.1 * xNoise;
+        bannerRef.current.rotation.y = 0.1 * yNoise;
+        bannerRef.current.rotation.z = 0.1 * zNoise;
     }
   });
 
