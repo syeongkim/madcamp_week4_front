@@ -6,9 +6,9 @@ interface DormProps {
   onClick?: () => void;
 }
 
-function DormCard({ type, color }: DormProps) {
+function DormCard({ type, color, onClick }: DormProps) {
   return (
-    <div className="dorm-container">
+    <div className="dorm-container cursor-pointer" onClick={onClick}>
       <h1 
         className={`dorm hover:text-${color}`}
         style={{

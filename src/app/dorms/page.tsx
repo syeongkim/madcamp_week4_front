@@ -1,29 +1,36 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useRouter } from 'next/navigation';
 import DormCard from '../components/DormCard';
 import './styles/dorms.css';
 
 const dorms = [
   {
     'title': 'Gryffindor',
-    'color': 'red',
+    'color': '#7C201C',
   },
   {
-    'title': 'Huffllepuff',
-    'color': 'yellow',
+    'title': 'Hufflepuff',
+    'color': '#E8CA27',
   },
   {
     'title': 'Ravenclaw',
-    'color': 'blue',
+    'color': '#3C6985',
   },
   {
     'title': 'Slytherin',
-    'color': 'green',
+    'color': '#376E35',
   }
 ];
 
 export default function Dorm() {
+  const router = useRouter();
+
+  const handleDormClick = (dorm: string) => {
+    router.push(`/dorms/${dorm.toLowerCase()}`);
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="grid grid-cols-2 gap-4 flex justify-center items-center">
@@ -32,6 +39,7 @@ export default function Dorm() {
             key={index}
             color={dorm.color}
             type={dorm.title}
+            onClick={() => handleDormClick(dorm.title)}
           />
         ))}
       </div>

@@ -13,12 +13,6 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      colors: {
-        griffindor: '#7C201C',
-        hufflepuff: '#E8CA27',
-        ravenclaw: '#3C6985',
-        slytherin: '#376E35',
-      }
     },
   },
   plugins: [],
