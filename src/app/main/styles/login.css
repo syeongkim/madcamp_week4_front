@@ -1,10 +1,10 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @font-face {
-  font-family: 'Harry P';
-  src: url('/fonts/harry_p.ttf'); /* Adjust the path to your font */
+  font-family: "Harry P";
+  src: url("/fonts/harry_p.ttf"); /* Adjust the path to your font */
 }
 
 *,
@@ -19,7 +19,7 @@
 }
 
 .button {
-  font-family: 'Harry P';
+  font-family: "Harry P";
   font-size: 30px;
   padding: 8px 16px; /* 0.5rem 1rem = 8px 16px */
   border-radius: 8px; /* 0.5rem = 8px */
