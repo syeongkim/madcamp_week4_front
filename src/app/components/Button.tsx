@@ -1,11 +1,12 @@
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
+  className: string;
 }
 
-function Button({ children, onClick }: ButtonProps) {
+function Button({ children, onClick, className }: ButtonProps) {
   return (
-    <button className="button" type="button" onClick={onClick}>
+    <button className={`button ${className}`} type="button" onClick={onClick}>
       {children}
     </button>
   );

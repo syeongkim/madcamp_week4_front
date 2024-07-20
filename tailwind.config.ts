@@ -16,6 +16,10 @@ const config: Config = {
         "magic-background": "url('/images/magic_background.jpg')",
         "quidditch-background": "url('/images/quidditch_background.jpg')",
       },
+      fontFamily: {
+        Harry: ["Harry P", "sans-serif"],
+        Animales: ["Animales Fantastic", "sans-serif"],
+      },
     },
   },
   plugins: [],
