@@ -12,6 +12,9 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "potion-background": "url('/images/potion_background.jpg')",
+        "magic-background": "url('/images/magic_background.jpg')",
+        "quidditch-background": "url('/images/quidditch_background.jpg')",
       },
     },
   },
