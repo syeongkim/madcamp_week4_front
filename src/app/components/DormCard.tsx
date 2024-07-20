@@ -12,7 +12,7 @@ function DormCard({ type, color, onClick }: DormProps) {
       <h1 
         className={`dorm hover:text-${color}`}
         style={{
-          textShadow: `4px 4px 8px ${color}`
+          textShadow: `6px 6px 10px ${color}`
         }}>{type}</h1>
     </div>
   );
