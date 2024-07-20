@@ -60,7 +60,21 @@ export default function DormDetailPage() {
   const bannerSrc = dormBanners[dorm.toLowerCase()];
 
   return (
-    <div>
+    <div className="relative w-screen h-screen overflow-hidden">
+      {/* Background Image Section */}
+      <div className="absolute inset-0 -z-10 flex flex-col">
+        <div className="h-1/3 w-screen bg-potion-background bg-center bg-cover"></div>
+        <div className="h-1/3 w-screen bg-magic-background bg-bottom bg-cover -mt-1/3"></div>
+        <div className="h-1/3 w-screen bg-quidditch-background bg-center bg-cover -mt-1/3"></div>
+      </div>
+
+      {/* Buttons */}
+      <div className="absolute inset-0 flex flex-col z-10">
+        <button className="h-1/3 w-screen bg-transparent" />
+        <button className="h-1/3 w-screen bg-transparent" />
+        <button className="h-1/3 w-screen bg-transparent" />
+      </div>
+
       <div className="scrolling-names-container">
         <div className="scrolling-names">
           {details.students.concat(details.students).map((student, index) => (
@@ -71,7 +85,7 @@ export default function DormDetailPage() {
 
       <FlagImage texturePath={bannerSrc} />
       <h1 className={clsx("text-4xl mt-8 dormtype", dormClass)}>{dormTitle}</h1>
-      <div className="dorm-detail my-6 justify-content">
+      <div className="dorm-detail my-6 text-center">
         <div className="text-center mb-4">Points: {details.points}</div>
       </div>
     </div>
