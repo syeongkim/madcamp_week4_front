@@ -1,8 +1,12 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import clsx from 'clsx';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { TextureLoader } from 'three';
+import * as THREE from 'three';
+
 import '../../globals.css';
 import '../styles/dorms.css';
 
@@ -30,6 +34,42 @@ const dormDetails: Record<string, DormDetail> = {
   },
 };
 
+const dormBanners: Record<string, string> = {
+  gryffindor: '/images/gryffindor_banner.png',
+  hufflepuff: '/images/hufflepuff_banner.png',
+  ravenclaw: '/images/ravenclaw_banner.png',
+  slytherin: '/images/slytherin_banner.png',
+};
+
+function Banner({ texturePath }: { texturePath: string }) {
+  const texture = useLoader(TextureLoader, texturePath);
+  const bannerRef = useRef<THREE.Mesh>(null);
+  const [aspect, setAspect] = useState(1);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = texturePath;
+    img.onload = () => {
+      setAspect(img.width / img.height);
+    };
+  }, [texturePath]);
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    if (bannerRef.current) {
+      bannerRef.current.rotation.z = 0.05 * Math.sin(t);
+      bannerRef.current.rotation.x = 0.05 * Math.cos(t);
+    }
+  });
+
+  return (
+    <mesh ref={bannerRef}>
+      <planeGeometry args={[5 * aspect, 5]} />
+      <meshStandardMaterial map={texture} transparent={true} />
+    </mesh>
+  );
+}
+
 export default function DormDetailPage() {
   const params = useParams();
   const dorm = params?.dorm as string;
@@ -49,6 +89,7 @@ export default function DormDetailPage() {
 
   const dormTitle = dorm.toUpperCase();
   const dormClass = `text-shadow-${dorm.toLowerCase()}`;
+  const bannerSrc = dormBanners[dorm.toLowerCase()];
 
   return (
     <>
@@ -59,7 +100,14 @@ export default function DormDetailPage() {
           ))}
         </div>
       </div>
-      <div className="dorm-content min-h-screen flex flex-col items-center justify-center text-center">
+      <div className="dorm-content min-h-screen flex flex-col items-center justify-center text-center relative">
+        <div className="absolute top-0 right-0 w-1/4 h-3/4">
+          <Canvas gl={{ alpha: true }}>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <Banner texturePath={bannerSrc} />
+          </Canvas>
+        </div>
         <h1 className={clsx('text-4xl mb-6 dormtype', dormClass)}>
           {dormTitle}
         </h1>
