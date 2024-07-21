@@ -24,6 +24,7 @@ const config: Config = {
       fontFamily: {
         Harry: ["Harry P", "sans-serif"],
         Animales: ["Animales Fantastic", "sans-serif"],
+        Nanum: ['Gowun Batang', 'serif'], // 원하는 폰트 이름 설정
       },
       fontSize: {
         "xxs": "0.5rem",
