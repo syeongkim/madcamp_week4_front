@@ -1,0 +1,54 @@
+/* Add this CSS to your styles.css or global stylesheet */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+  
+.no-scrollbar {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+  
+.scrolling {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.selected-ingredient {
+  position: relative;
+}
+
+.selected-ingredient::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Transparent black */
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.submit-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 30px;
+}
+
+.submit-button {
+  text-shadow: 2px 2px 4px blue;
+  transition: color 0.3s ease;
+}
+
+.submit-button:hover {
+  color: blue;
+}
+
+.ingredients-container {
+  width: auto;
+  height: 100vh; /* Full height of the viewport */
+  padding: 10px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: none; /* Firefox */
+}

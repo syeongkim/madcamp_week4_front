@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -43,7 +44,23 @@ const path = require('path');
       const ingredientImage = await page.$eval(ingredientImageSelector, el => el.src);
       console.log("image is: ", ingredientImage);
 
-      results.push({ name: ingredientName, imageUrl: ingredientImage });
+      const imagePath = path.join(__dirname, 'images', `${ingredientName}.png`);
+      const writer = fs.createWriteStream(imagePath);
+      
+      const response = await axios({
+        url: ingredientImage,
+        method: 'GET',
+        responseType: 'stream'
+      });
+
+      response.data.pipe(writer);
+
+      await new Promise((resolve, reject) => {
+        writer.on('finish', resolve);
+        writer.on('error', reject);
+      });
+
+      results.push({ name: ingredientName, imageUrl: `/images/${ingredientName}.png` });
 
     } catch (e) {
       console.log(`Error crawling ${ingredient}`, e);
@@ -53,7 +70,7 @@ const path = require('path');
   await browser.close();
 
   // Define the path where the JSON file will be saved
-  const filePath = path.join(__dirname, 'extraIngredient.json');
+  const filePath = path.join(__dirname, 'extraIngredients.json');
 
   // Save the results to a JSON file
   fs.writeFileSync(filePath, JSON.stringify(results, null, 2));

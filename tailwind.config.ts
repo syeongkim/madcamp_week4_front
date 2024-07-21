@@ -15,10 +15,18 @@ const config: Config = {
         "potion-background": "url('/images/potion_background.jpg')",
         "magic-background": "url('/images/magic_background.jpg')",
         "quidditch-background": "url('/images/quidditch_background.jpg')",
+        "makepotions-background": "url('/images/makepotions_background.jpg')",
+      },
+      backgroundSize: {
+        '50%': '50%',
+        '75%': '75%',
       },
       fontFamily: {
         Harry: ["Harry P", "sans-serif"],
         Animales: ["Animales Fantastic", "sans-serif"],
+      },
+      fontSize: {
+        "xxs": "0.5rem",
       },
     },
   },

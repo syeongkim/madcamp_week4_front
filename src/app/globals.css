@@ -42,8 +42,15 @@ body {
 }
 
 @layer utilities {
-  .text-gradient {
+  .text-gradient-yellow {
     background: linear-gradient(to bottom, #ffc400, #925203);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 80px;
+    margin-bottom: 10px;
+  }
+  .text-gradient-blue {
+    background: linear-gradient(to bottom, #0041FF, #110060);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 80px;
