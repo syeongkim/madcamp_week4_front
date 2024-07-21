@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Polyjuice Potion",
+    "ingredients": ["Horn of Bucorn", "Leech", "Fluxweed", "Boomslang skin"]
+  },
+  {
+    "name": "Felix Felicis",
+    "ingredients": ["Squill bulb", "Ashwinder egg", "Occamy", "Murtlap Essence"]
+  },
+  {
+    "name": "Veritaserum",
+    "ingredients": ["Ashwinder egg", "Unicorn hair", "Dittany", "Clabbert"]
+  },
+  {
+    "name": "Skele-Gro",
+    "ingredients": ["Horn of Bucorn", "Mandrake", "Murtlap Essence"]
+  },
+  {
+    "name": "Draught of Living Death",
+    "ingredients": ["Asphodel", "Wormwood", "Valerian root"]
+  },
+  {
+    "name": "Wiggenweld Potion",
+    "ingredients": ["Asphodel", "Murtlap Essence", "Dragon liver"]
+  },
+  {
+    "name": "Cure for Boils",
+    "ingredients": ["Flobberworm Mucus", "Dittany", "Nettle"]
+  },
+  {
+    "name": "Gillyweed",
+    "ingredients": ["Gillyweed", "Murtlap Essence", "Beetle"]
+  },
+  {
+    "name": "Essence of Comfrey",
+    "ingredients": ["Comfrey", "Dragon liver", "Nettle"]
+  },
+  {
+    "name": "Mandrake Restorative Draught",
+    "ingredients": ["Mandrake", "Valerian root", "Wormwood"]
+  },
+  {
+    "name": "Beautiflcation Potion",
+    "ingredients": ["Rose Petal", "Moonstone", "Unicorn hair"]
+  },
+  {
+    "name": "Panacea",
+    "ingredients": ["Sal Ammoniac", "Unicorn horn", "Dittany"]
+  },
+  {
+    "name": "Swelling Solution",
+    "ingredients": ["Pufferfish eyes", "Dittany", "Nettle"]
+  }
+]
