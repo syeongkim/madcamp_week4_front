@@ -22,6 +22,8 @@ const Flag = ({ texturePath }: { texturePath: string }) => {
     const material = new THREE.MeshLambertMaterial({
       map: texture,
       side: THREE.DoubleSide,
+      alphaTest: 0.5, // 알파 값을 기준으로 픽셀 렌더링
+      transparent: true, // 텍스처의 알파 채널 사용
     });
     if (flagRef.current) {
       flagRef.current.geometry = geometry;
