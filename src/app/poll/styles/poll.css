@@ -8,15 +8,18 @@
   background: linear-gradient(to bottom, #ffc400, #925203);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 80px;
-  margin-bottom: 10px;
+  font-size: 70px;
 }
 
 .detail {
-  font-size: 60px;
-  margin-bottom: 10px;
+  font-size: 50px;
   padding: 10px;
   cursor: pointer;
+  color: white;
+}
+
+.detail-kr {
+  font-size: 15px;
   color: white;
 }
 
@@ -35,6 +38,17 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
+.title-kr {
+  font-size: 20px;
+  color: white;
+}
+
+.option-kr {
+  font-size: 15px;
+  color: white;
+}
+
 
 .submit-button:hover {
   background-color: #005bb5;

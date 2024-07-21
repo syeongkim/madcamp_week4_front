@@ -53,7 +53,7 @@ export default function SignUp() {
           <div>
             <Link href="/dorms">
               <Button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600">
-                Sign in
+                Sign Up
               </Button>
             </Link>
           </div>
