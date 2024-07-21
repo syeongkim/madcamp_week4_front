@@ -51,7 +51,7 @@ const Potion: React.FC = () => {
     );
 
     if (foundRecipe) {
-      setResult(`${foundRecipe.name} is created`);
+      setResult(`${foundRecipe.name} is created \n ${foundRecipe.effect}`);
     } else {
       setResult("Wrong combination, try again!");
     }
@@ -63,21 +63,19 @@ const Potion: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-makepotions-background bg-cover bg-center">
-      <h1 className="text-gradient-blue font-Harry text-6xl text-center mb-6 mt-4">Potion</h1>
+    <div className="min-h-screen bg-makepotions-background bg-cover bg-center flex">
       <div
-        className="flex overflow-x-auto whitespace-nowrap mb-6 no-scrollbar"
+        className="ingredients-container overflow-y-auto"
         ref={scrollContainerRef}
         onMouseDown={handleMouseDown}
       >
         {ingredients.map((ingredient, index) => (
           <div
             key={index}
-            className={`p-1 rounded-lg shadow-lg inline-block cursor-pointer relative ${selectedIngredients.includes(ingredient.name) ? "selected-ingredient" : ""
-              }`}
+            className={`p-1 rounded-lg shadow-lg cursor-pointer relative mb-2 flex flex-col items-center justify-center ${selectedIngredients.includes(ingredient.name) ? "selected-ingredient" : ""}`}
             onClick={() => handleIngredientClick(ingredient.name)}
           >
-            <div className="w-20 h-20 relative overflow-hidden rounded-md mb-2">
+            <div className="w-20 h-20 relative overflow-hidden rounded-md flex items-center justify-center">
               <img src={ingredient.imageUrl} alt={ingredient.name} className="absolute inset-0 w-full h-full object-cover object-center" />
               {selectedIngredients.includes(ingredient.name) && (
                 <>
@@ -98,23 +96,25 @@ const Potion: React.FC = () => {
                 </>
               )}
             </div>
-            <h2 className="text-xxs font-bold text-white font-Animales text-center">{ingredient.name}</h2>
+            <h2 className="text-xxs font-bold text-white font-Animales text-center mt-2">{ingredient.name}</h2>
           </div>
         ))}
       </div>
-      <div className="submit-button-container">
-        <button className="submit-button mt-2 px-4 py-2 text-white rounded-lg font-Harry" onClick={checkRecipe}>
-          Submit
-        </button>
-      </div>
-      {result && (
-        <div className="text-center mt-4">
-          <h2 className="text-3xl font-bold text-black font-Animales">{result}</h2>
-          <button className="mt-2 px-4 py-2 text-white rounded-lg font-Animales" onClick={resetSelection}>
-            Try Again
+      <div className="flex-1 flex flex-col justify-center items-center">
+        <div className="submit-button-container">
+          <button className="submit-button mt-2 px-4 py-2 text-white rounded-lg font-Harry" onClick={checkRecipe}>
+            Submit
           </button>
         </div>
-      )}
+        {result && (
+          <div className="text-center mt-4">
+            <h2 className="text-3xl font-bold text-black font-Animales">{result}</h2>
+            <button className="mt-2 px-4 py-2 text-white rounded-lg font-Animales" onClick={resetSelection}>
+              Try Again
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
