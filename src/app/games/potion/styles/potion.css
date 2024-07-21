@@ -12,3 +12,35 @@
   cursor: grabbing;
   cursor: -webkit-grabbing;
 }
+
+.selected-ingredient {
+  position: relative;
+}
+
+.selected-ingredient::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Transparent black */
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.submit-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 30px;
+}
+
+.submit-button {
+  text-shadow: 2px 2px 4px blue;
+  transition: color 0.3s ease;
+}
+
+.submit-button:hover {
+  color: blue;
+}
