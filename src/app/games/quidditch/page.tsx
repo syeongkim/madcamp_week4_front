@@ -1,7 +1,7 @@
 // page.tsx
 import React from "react";
 
-const HelloWorld: React.FC = () => {
+const Quidditch: React.FC = () => {
   return (
     <div>
       <h1 className="text-white">quidditch</h1>
@@ -9,4 +9,4 @@ const HelloWorld: React.FC = () => {
   );
 };
 
-export default HelloWorld;
+export default Quidditch;

@@ -9,10 +9,10 @@ export default function Main() {
       <div className="flex flex-col justify-center items-center space-y-4">
         <Logo />
         <Link href="/login">
-          <Button>Log in</Button>
+          <Button className="text-gradient">Log in</Button>
         </Link>
         <Link href="/poll">
-          <Button>Sign Up: Find Your Hogwarts House</Button>
+          <Button className="text-gradient">Sign Up: Find Your Hogwarts House</Button>
         </Link>
       </div>
     </div>
