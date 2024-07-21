@@ -1,9 +1,12 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import clsx from "clsx";
+
 import FlagImage from "../../components/FlagImage";
+
 import "../../globals.css";
 import "../styles/dorms.css";
 
@@ -40,6 +43,7 @@ const dormBanners: Record<string, string> = {
 
 export default function DormDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const dorm = params?.dorm as string;
 
   const [details, setDetails] = useState<DormDetail | null>(null);
@@ -59,34 +63,44 @@ export default function DormDetailPage() {
   const dormClass = `text-shadow-${dorm.toLowerCase()}`;
   const bannerSrc = dormBanners[dorm.toLowerCase()];
 
+  const handleGameClick = (game: string) => {
+    console.log("Game clicked:", game);
+    router.push(`games/${game}`);
+  }
+
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
-      {/* Background Image Section */}
-      <div className="absolute inset-0 -z-10 flex flex-col">
-        <div className="h-1/3 w-screen bg-potion-background bg-center bg-cover"></div>
-        <div className="h-1/3 w-screen bg-magic-background bg-bottom bg-cover -mt-1/3"></div>
-        <div className="h-1/3 w-screen bg-quidditch-background bg-center bg-cover -mt-1/3"></div>
-      </div>
-
-      {/* Buttons */}
-      <div className="absolute inset-0 flex flex-col z-10">
-        <button className="h-1/3 w-screen bg-transparent" />
-        <button className="h-1/3 w-screen bg-transparent" />
-        <button className="h-1/3 w-screen bg-transparent" />
-      </div>
-
-      <div className="scrolling-names-container">
+    <div className="h-screen bg-white relative">
+      <Link href="/games/potion">
+        <div
+          className="h-1/3 w-full bg-potion-background bg-center bg-cover z-10"
+          style={{ position: 'relative', pointerEvents: 'auto' }}
+        ></div>
+      </Link>
+      <Link href="/games/magic">
+        <div
+          className="h-1/3 w-full -mt-1/3 bg-magic-background bg-bottom bg-cover z-10"
+          style={{ position: 'relative', pointerEvents: 'auto' }}
+        ></div>
+      </Link>
+      <Link href="/games/quidditch">
+      <div
+        className="h-1/3 w-full -mt-1/3 bg-quidditch-background bg-center bg-cover z-10"
+        style={{ position: 'relative', pointerEvents: 'auto' }}
+      ></div>
+      </Link>
+      <div className="scrolling-names-container absolute top-0 left-0 w-full z-20">
         <div className="scrolling-names">
           {details.students.concat(details.students).map((student, index) => (
             <span key={index}>{student}</span>
           ))}
         </div>
       </div>
-
-      <FlagImage texturePath={bannerSrc} />
-      <h1 className={clsx("text-4xl mt-8 dormtype", dormClass)}>{dormTitle}</h1>
-      <div className="dorm-detail my-6 text-center">
-        <div className="text-center mb-4">Points: {details.points}</div>
+      <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center z-30 pointer-events-none">
+        <FlagImage texturePath={bannerSrc} />
+        <h1 className={clsx("text-4xl mt-8 dormtype", dormClass)}>{dormTitle}</h1>
+        <div className="dorm-detail my-6 text-center">
+          <div className="text-center mb-4">Points: {details.points}</div>
+        </div>
       </div>
     </div>
   );

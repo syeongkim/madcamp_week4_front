@@ -28,6 +28,7 @@ export default function Dorm() {
   const router = useRouter();
 
   const handleDormClick = (dorm: string) => {
+    console.log(dorm, "clicked");
     router.push(`/dorms/${dorm.toLowerCase()}`);
   };
 
