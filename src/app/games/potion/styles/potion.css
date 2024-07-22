@@ -2,12 +2,12 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-  
+
 .no-scrollbar {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
-  
+
 .scrolling {
   cursor: grabbing;
   cursor: -webkit-grabbing;
@@ -51,4 +51,100 @@
   padding: 10px;
   overflow-y: auto; /* Enable vertical scrolling */
   scrollbar-width: none; /* Firefox */
+}
+/* 버튼 스타일 */
+.potion-black-market-button {
+  background-image: url("/images/potion_black_market.png");
+  width: 90px; /* 원하는 크기로 조정 */
+  height: 60px; /* 원하는 크기로 조정 */
+  background-size: contain; /* 원본 비율 유지 */
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5); /* 하얀색 그림자 */
+  position: relative;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 배경 반투명 블랙 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: red;
+}
+
+/* 새 모달 스타일 추가 */
+.new-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 배경 반투명 블랙 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* 새 모달이 기존 모달 위에 표시되도록 설정 */
+}
+
+.new-modal-content {
+  background: url("/images/paper_background.jpg") no-repeat center center;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  transform: scaleY(0); /* 초기 상태로 숨기기 */
+  opacity: 0; /* 초기 상태로 숨기기 */
+  animation: paper-fold 0.5s forwards; /* 애니메이션 적용 */
+}
+
+.new-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.new-modal-close:hover {
+  color: red;
+}
+
+@keyframes paper-fold {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
