@@ -1,0 +1,37 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* 스크롤이 생기지 않도록 */
+}
+
+#root {
+  height: 100%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-size: cover;
+}
+
+.magic-input {
+  background: linear-gradient(135deg, #e0ffe0, #a8ffb8); /* 초록색 계열 그라데이션 */
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); /* 초록색 그림자 */
+  font-size: 1.2em;
+  padding: 10px;
+  text-align: center;
+  width: 80%;
+  transition: all 0.3s ease-in-out;
+}
+
+.magic-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #ff9999;
+  transform: scale(1.05);
+}

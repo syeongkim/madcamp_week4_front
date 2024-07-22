@@ -16,6 +16,7 @@ const config: Config = {
         "magic-background": "url('/images/magic_background.jpg')",
         "quidditch-background": "url('/images/quidditch_background.jpg')",
         "makepotions-background": "url('/images/makepotions_background.jpg')",
+        "spell-background": "url('/images/spell_background.jpg')",
       },
       backgroundSize: {
         '50%': '50%',

@@ -56,6 +56,20 @@ body {
     font-size: 80px;
     margin-bottom: 10px;
   }
+  .text-gradient-red {
+    background: linear-gradient(to bottom, #FF2300, #2D0600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 60px;
+    margin-bottom: 10px;
+  }
+  .text-gradient-green {
+    background: linear-gradient(to bottom, #02E602, #062C00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 60px;
+    margin-bottom: 10px;
+  }
   .text-balance {
     text-wrap: balance;
   }
