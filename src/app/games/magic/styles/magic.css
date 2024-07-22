@@ -1,11 +1,14 @@
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
+  width: 100%;
   height: 100%;
-  overflow: hidden; /* 스크롤이 생기지 않도록 */
+  /* overflow: hidden;  */
 }
 
 #root {
+  width: 100%;
   height: 100%;
 }
 .container {
@@ -13,6 +16,7 @@ body, html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 100%;
   text-align: center;
   padding: 20px;
@@ -21,7 +25,11 @@ body, html {
 }
 
 .magic-input {
-  background: linear-gradient(135deg, #e0ffe0, #a8ffb8); /* 초록색 계열 그라데이션 */
+  background: linear-gradient(
+    135deg,
+    #e0ffe0,
+    #a8ffb8
+  ); /* 초록색 계열 그라데이션 */
   box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); /* 초록색 그림자 */
   font-size: 1.2em;
   padding: 10px;
@@ -34,4 +42,31 @@ body, html {
   outline: none;
   box-shadow: 0 0 10px #ff9999;
   transform: scale(1.05);
+}
+
+.bg-owl {
+  background-image: url("/images/owl.png");
+  width: 80%;
+  height: 80%;
+}
+
+.modal {
+  will-change: opacity transform;
+  animation: fade_in_2 3s cubic-bezier(0.14, 0.18, 0.16, 1.02);
+}
+
+@keyframes fade_in_2 {
+  0%,
+  14% {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.95);
+  }
+  15% {
+    opacity: 0.25;
+  }
+  30%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

@@ -17,18 +17,19 @@ const config: Config = {
         "quidditch-background": "url('/images/quidditch_background.jpg')",
         "makepotions-background": "url('/images/makepotions_background.jpg')",
         "spell-background": "url('/images/spell_background.jpg')",
+        owl: "url('/images/owl.png')",
       },
       backgroundSize: {
-        '50%': '50%',
-        '75%': '75%',
+        "50%": "50%",
+        "75%": "75%",
       },
       fontFamily: {
         Harry: ["Harry P", "sans-serif"],
         Animales: ["Animales Fantastic", "sans-serif"],
-        Nanum: ['Gowun Batang', 'serif'], // 원하는 폰트 이름 설정
+        Nanum: ["Gowun Batang", "serif"], // 원하는 폰트 이름 설정
       },
       fontSize: {
-        "xxs": "0.5rem",
+        xxs: "0.5rem",
       },
     },
   },
