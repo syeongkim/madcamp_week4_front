@@ -33,7 +33,7 @@ jobs:
     - name: Build and push Docker image
       run: |
         docker build -t syeongkim/madcamp4 .
-        docker tag syeongkim/your_app_name:latest syeongkim/madcamp4:${{ github.sha }}
+        docker tag syeongkim/madcamp4:latest syeongkim/madcamp4:${{ github.sha }}
         docker push syeongkim/madcamp4:latest
         docker push syeongkim/madcamp4:${{ github.sha }}
 
