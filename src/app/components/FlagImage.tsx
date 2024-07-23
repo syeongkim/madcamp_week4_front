@@ -29,7 +29,7 @@ const Flag = ({ texturePath }: { texturePath: string }) => {
       flagRef.current.geometry = geometry;
       flagRef.current.material = material;
     }
-  }, [texture, aspectRatio]);
+  }, [texture, texturePath, aspectRatio]);
 
   useFrame(() => {
     const time = Date.now() * 0.001;

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import Image from "next/image";
 import ingredients from "./ingredient.json";
 import recipes from "./recipe.json";
 import "./styles/potion.css";
@@ -96,7 +97,7 @@ const Potion: React.FC = () => {
             onClick={() => handleIngredientClick(ingredient.name)}
           >
             <div className="w-20 h-20 relative overflow-hidden rounded-md flex items-center justify-center">
-              <img
+              <Image
                 src={ingredient.imageUrl}
                 alt={ingredient.name}
                 className="absolute inset-0 w-full h-full object-cover object-center"
