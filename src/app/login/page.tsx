@@ -117,10 +117,12 @@ export default function Login() {
 
     try {
       const res = await fetch('http://3.39.212.221:8080/users', {
+        mode: 'cors',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
       });
   
       console.log(res);
