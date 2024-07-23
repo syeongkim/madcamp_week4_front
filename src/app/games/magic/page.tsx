@@ -121,6 +121,7 @@ const Magic: React.FC = () => {
 
   return (
     <div className="text-white bg-cover bg-spell-background min-h-screen flex flex-col justify-center items-center">
+      <audio src="/musics/19_Hedwigs_Theme.mp3" autoPlay loop />
       <h1 className="font-Harry text-center text-gradient-green">
         Magic Spell
       </h1>

@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import Image from "next/image";
 import ingredients from "./ingredient.json";
 import recipes from "./recipe.json";
 import "./styles/potion.css";
 import Dropdown from "../../components/Dropdown";
+import Image from "../../components/Image";
 
 const Potion: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -82,6 +82,7 @@ const Potion: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-makepotions-background bg-cover bg-center flex relative">
+      <audio src="/musics/02_Harry's_Wondrous_World.mp3" autoPlay loop />
       <div
         className="ingredients-container overflow-y-auto"
         ref={scrollContainerRef}
@@ -100,7 +101,7 @@ const Potion: React.FC = () => {
               <Image
                 src={ingredient.imageUrl}
                 alt={ingredient.name}
-                className="absolute inset-0 w-full h-full object-cover object-center"
+                className="absolute inset-0 w-full h-full object-cover object-center" 
               />
               {selectedIngredients.includes(ingredient.name) && (
                 <>

@@ -1,7 +1,10 @@
+'use client';
+
 import Link from "next/link";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
 import "./styles/main.css"; // Tailwind CSS는 별도로 구성되어야 함
+import BackgroundMusic from "../components/BackgroundMusic";
 
 export default function Main() {
   return (
@@ -15,6 +18,7 @@ export default function Main() {
           <Button className="text-gradient-yellow">Sign Up: Find Your Hogwarts House</Button>
         </Link>
       </div>
+      <audio src="/musics/01_Prologue.mp3" autoPlay loop />
     </div>
   );
 }

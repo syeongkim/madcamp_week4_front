@@ -5,6 +5,7 @@ import Question from '../components/Question';
 import Result from '../components/Result';
 import Confused from '../components/Confused';
 import Button from '../components/Button';
+import BackgroundMusic from '../components/BackgroundMusic';
 import './styles/poll.css';
 
 const questions = [
@@ -143,6 +144,7 @@ export default function Poll() {
 
   return (
     <div className="poll min-h-screen flex flex-col items-center justify-center">
+      <audio src="/musics/08_Mr_Longbottom_Flies.mp3" autoPlay loop />
       {finalResult === null ? (
         showConfused ? (
           <div>
