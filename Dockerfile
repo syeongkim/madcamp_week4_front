@@ -7,16 +7,6 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Update npm to latest version
-RUN npm install -g npm@10.8.2
-
-# Clear npm cache
-RUN npm cache clean --force
-
-# Set npm timeout
-RUN npm config set fetch-retry-mintimeout 20000
-RUN npm config set fetch-retry-maxtimeout 120000
-
 # Install dependencies
 RUN npm install
 
@@ -26,8 +16,17 @@ COPY . .
 # Build the Next.js application
 RUN npm run build
 
+# 새로운 단독의 nginx 이미지 생성
+FROM nginx
+
 # Expose the port the app runs on
 EXPOSE 3000
+
+# default.conf을 /etc/nginx/conf.d/ 경로에 있는 default.conf에 복사한다.
+COPY ./default.conf /etc/nginx/conf.d/default.conf
+
+# nextjs build한 결과물을 /usr/share/nginx/html에 복사한다.
+COPY --from=build app/out  /usr/share/nginx/html
 
 # Define the command to run the application
 CMD ["npm", "start"]
