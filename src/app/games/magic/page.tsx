@@ -148,7 +148,7 @@ const Magic: React.FC = () => {
       </div>
       {selectedSpell && (
         <div className="font-Animales text-center px-10">
-          <p className="text-xl mt-6">"{selectedSpell.description}"</p>
+          <p className="text-xl mt-6">&quot;{selectedSpell.description}&quot;</p>
           <div className="mt-4 flex items-center">
             <input
               type="text"
