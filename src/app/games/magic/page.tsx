@@ -13,7 +13,8 @@ const Magic: React.FC = () => {
   const [userInput, setUserInput] = useState<string>("");
   const [feedback, setFeedback] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isSpellListModalOpen, setIsSpellListModalOpen] = useState<boolean>(false);
+  const [isSpellListModalOpen, setIsSpellListModalOpen] =
+    useState<boolean>(false);
 
   const handleLetterClick = (letter: string) => {
     setSelectedLetter(letter);
@@ -90,7 +91,7 @@ const Magic: React.FC = () => {
       </div>
       <div className="fixed top-0 right-0 p-4 flex flex-col">
         <button
-          className="potion-black-market-button"
+          className="magic-hint-button"
           onClick={handleShowSpellList}
         ></button>
         <text className="mt-3 font-Animales text-xs text-white text-center">

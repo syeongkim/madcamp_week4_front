@@ -71,7 +71,7 @@ html {
   }
 }
 
-.potion-black-market-button {
+.magic-hint-button {
   background-image: url("/images/magic_hint.png");
   width: 90px; /* 원하는 크기로 조정 */
   height: 60px; /* 원하는 크기로 조정 */
