@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import ingredients from "./ingredient.json";
 import recipes from "./recipe.json";
 import "./styles/potion.css";
+import Dropdown from "../../components/Dropdown";
 
 const Potion: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -11,6 +12,8 @@ const Potion: React.FC = () => {
   const [result, setResult] = useState<string | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showNewModal, setShowNewModal] = useState<boolean>(false);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [selectedPotion, setSelectedPotion] = useState<{ name: string; ingredients: string[] } | null>(null);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     const container = scrollContainerRef.current;
@@ -66,9 +69,14 @@ const Potion: React.FC = () => {
     setResult(null);
   };
 
-  const openNewModal = () => {
-    setShowModal(false);
+  const handlePotionClick = (recipe: { name: string; ingredients: string[] }) => {
+    setSelectedPotion(recipe);
     setShowNewModal(true);
+    setShowDropdown(false);
+    setTimeout(() => {
+      setShowNewModal(false);
+      setSelectedPotion(null);
+    }, 5000);
   };
 
   return (
@@ -81,11 +89,10 @@ const Potion: React.FC = () => {
         {ingredients.map((ingredient, index) => (
           <div
             key={index}
-            className={`p-1 rounded-lg shadow-lg cursor-pointer relative mb-2 flex flex-col items-center justify-center ${
-              selectedIngredients.includes(ingredient.name)
+            className={`p-1 rounded-lg shadow-lg cursor-pointer relative mb-2 flex flex-col items-center justify-center ${selectedIngredients.includes(ingredient.name)
                 ? "selected-ingredient"
                 : ""
-            }`}
+              }`}
             onClick={() => handleIngredientClick(ingredient.name)}
           >
             <div className="w-20 h-20 relative overflow-hidden rounded-md flex items-center justify-center">
@@ -158,27 +165,38 @@ const Potion: React.FC = () => {
           onClick={() => setShowModal(false)}
         >
           <div onClick={(e) => e.stopPropagation()}>
-            <h2 className="text-7xl">Want a hint?</h2>
-            <p className="text-4xl">Write "10 points" to view the hint.</p>
+            <h2 className="text-4xl">Select the potion for which you want to check the ingredients</h2>
+            <h4 className="text-2xl">You must pay 10 points to get hint</h4>
             <div className="mt-4">
-              <button
-                className="px-4 py-2 bg-green-500 text-white rounded-lg"
-                onClick={openNewModal}
-              >
-                Okay
-              </button>
-              <button
-                className="px-4 py-2 bg-red-500 text-white rounded-lg ml-4"
-                onClick={() => setShowModal(false)}
-              >
-                No thanks
-              </button>
+              <div className="relative inline-block text-left">
+                <button
+                  className="inline-flex justify-center w-full px-4 py-2 text-white rounded-lg text-xl"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                >
+                  Show Potions List
+                </button>
+                {showDropdown && (
+                  <div className="origin-top-right no-scrollbar absolute left-1/2 transform -translate-x-1/2 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none max-h-60 overflow-y-auto">
+                    <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                      {recipes.map((recipe, index) => (
+                        <Dropdown
+                          key={index}
+                          onClick={() => handlePotionClick(recipe)}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        >
+                          {recipe.name}
+                        </Dropdown>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {showNewModal && (
+{showNewModal && selectedPotion && (
         <div
           className="new-modal font-Harry text-white text-center"
           onClick={() => setShowNewModal(false)}
@@ -193,9 +211,9 @@ const Potion: React.FC = () => {
             >
               &times;
             </span>
-            <h2 className="text-black text-7xl">New Hint Modal</h2>
+            <h2 className="text-black text-6xl mb-4">{selectedPotion.name}</h2>
             <p className="text-black text-4xl">
-              Here is your new hint content.
+              {selectedPotion.ingredients.join(', ')}
             </p>
           </div>
         </div>
