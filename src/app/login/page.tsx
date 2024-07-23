@@ -116,7 +116,7 @@ export default function Login() {
     event.preventDefault();
 
     try {
-      const res = await fetch('http://3.39.212.221:8080/users', {
+      const res = await fetch('http://localhost:8080/users', {
         mode: 'cors',
         method: 'GET',
         headers: {
