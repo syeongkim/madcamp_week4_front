@@ -1,27 +1,27 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import DormCard from '../components/DormCard';
-import './styles/dorms.css';
+import React from "react";
+import { useRouter } from "next/navigation";
+import DormCard from "../components/DormCard";
+import "./styles/dorms.css";
 
 const dorms = [
   {
-    'title': 'Gryffindor',
-    'color': '#7C201C',
+    title: "Gryffindor",
+    color: "#7C201C",
   },
   {
-    'title': 'Hufflepuff',
-    'color': '#E8CA27',
+    title: "Hufflepuff",
+    color: "#E8CA27",
   },
   {
-    'title': 'Ravenclaw',
-    'color': '#3C6985',
+    title: "Ravenclaw",
+    color: "#3C6985",
   },
   {
-    'title': 'Slytherin',
-    'color': '#376E35',
-  }
+    title: "Slytherin",
+    color: "#376E35",
+  },
 ];
 
 export default function Dorm() {
