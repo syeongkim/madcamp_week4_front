@@ -13,6 +13,7 @@ const Magic: React.FC = () => {
   const [userInput, setUserInput] = useState<string>("");
   const [feedback, setFeedback] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isSpellListModalOpen, setIsSpellListModalOpen] = useState<boolean>(false);
 
   const handleLetterClick = (letter: string) => {
     setSelectedLetter(letter);
@@ -61,6 +62,14 @@ const Magic: React.FC = () => {
     setFeedback("");
   };
 
+  const handleShowSpellList = () => {
+    setIsSpellListModalOpen(true);
+  };
+
+  const handleCloseSpellListModal = () => {
+    setIsSpellListModalOpen(false);
+  };
+
   return (
     <div className="text-white bg-cover bg-spell-background min-h-screen flex flex-col justify-center items-center">
       <h1 className="font-Harry text-center text-gradient-green">
@@ -78,6 +87,15 @@ const Magic: React.FC = () => {
             </Button>
           )
         )}
+      </div>
+      <div className="fixed top-0 right-0 p-4 flex flex-col">
+        <button
+          className="potion-black-market-button"
+          onClick={handleShowSpellList}
+        ></button>
+        <text className="mt-3 font-Animales text-xs text-white text-center">
+          secret hint
+        </text>
       </div>
       {selectedSpell && (
         <div className="font-Animales text-center px-10">
@@ -117,6 +135,32 @@ const Magic: React.FC = () => {
           <p className="text-white text-center mb-12 font-Harry text-5xl">
             Correct! Your owl will give you 1 point each day.
           </p>
+        </div>
+      )}
+      {isSpellListModalOpen && (
+        <div
+          className="modal fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50"
+          onClick={handleCloseSpellListModal}
+        >
+          <div
+            className="relative bg-paper-background rounded-lg p-4 w-10/12 max-w-2xl mx-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-2 right-2 text-black text-2xl"
+              onClick={handleCloseSpellListModal}
+            >
+              &times;
+            </button>
+            <h2 className="text-4xl font-Harry mb-4 text-black">All Spells</h2>
+            <ul className="spell-list overflow-y-auto max-h-80">
+              {spells.map((spell, index) => (
+                <li key={index} className="mb-2 text-black font-Animales">
+                  <strong>● {spell.name}</strong>: {spell.description}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </div>

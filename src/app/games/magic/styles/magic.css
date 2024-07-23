@@ -70,3 +70,28 @@ html {
     transform: translateY(0) scale(1);
   }
 }
+
+.potion-black-market-button {
+  background-image: url("/images/magic_hint.png");
+  width: 90px; /* 원하는 크기로 조정 */
+  height: 60px; /* 원하는 크기로 조정 */
+  background-size: contain; /* 원본 비율 유지 */
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5); /* 하얀색 그림자 */
+  position: relative;
+}
+
+.spell-modal {
+  background: url("/images/paper_background.jpg") no-repeat center center;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  transform: scaleY(0); /* 초기 상태로 숨기기 */
+  opacity: 0; /* 초기 상태로 숨기기 */
+  animation: paper-fold 0.5s forwards; /* 애니메이션 적용 */
+}

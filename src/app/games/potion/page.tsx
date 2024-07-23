@@ -90,8 +90,8 @@ const Potion: React.FC = () => {
           <div
             key={index}
             className={`p-1 rounded-lg shadow-lg cursor-pointer relative mb-2 flex flex-col items-center justify-center ${selectedIngredients.includes(ingredient.name)
-                ? "selected-ingredient"
-                : ""
+              ? "selected-ingredient"
+              : ""
               }`}
             onClick={() => handleIngredientClick(ingredient.name)}
           >
@@ -196,7 +196,7 @@ const Potion: React.FC = () => {
         </div>
       )}
 
-{showNewModal && selectedPotion && (
+      {showNewModal && selectedPotion && (
         <div
           className="new-modal font-Harry text-white text-center"
           onClick={() => setShowNewModal(false)}
