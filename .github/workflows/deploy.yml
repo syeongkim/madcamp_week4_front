@@ -37,22 +37,22 @@ jobs:
         docker push syeongkim/madcamp4:latest
         docker push syeongkim/madcamp4:${{ github.sha }}
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
+#   deploy:
+#     needs: build
+#     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v3
 
-    - name: Execute SSH commands
-      uses: appleboy/ssh-action@v0.1.3
-      with:
-        host: ${{ secrets.AWS_EC2_HOST }}
-        username: ${{ secrets.AWS_EC2_USER }}
-        key: ${{ secrets.AWS_EC2_KEY }}
-        script: |
-          docker pull syeongkim/madcamp4:latest
-          docker stop madcamp4 || true
-          docker rm madcamp4 || true
-          docker run -d --name madcamp4 -p 80:3000 syeongkim/madcamp4:latest
+#     - name: Execute SSH commands
+#       uses: appleboy/ssh-action@v0.1.3
+#       with:
+#         host: ${{ secrets.AWS_EC2_HOST }}
+#         username: ${{ secrets.AWS_EC2_USER }}
+#         key: ${{ secrets.AWS_EC2_KEY }}
+#         script: |
+#           docker pull syeongkim/madcamp4:latest
+#           docker stop madcamp4 || true
+#           docker rm madcamp4 || true
+#           docker run -d --name madcamp4 -p 80:3000 syeongkim/madcamp4:latest
