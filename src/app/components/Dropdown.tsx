@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface DropdownProps {
   children: React.ReactNode;
@@ -7,11 +7,11 @@ interface DropdownProps {
 }
 
 const Dropdown = ({ children, onClick, className }: DropdownProps) => {
-    return (
-        <div className={className} onClick={onClick}>
-            { children }
-        </div>
-    )
+  return (
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default Dropdown;
