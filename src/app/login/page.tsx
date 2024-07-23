@@ -116,6 +116,7 @@ export default function Login() {
     event.preventDefault();
 
     try {
+      // change to your server's URL
       const res = await fetch('http://3.39.212.221:8080/api/users', {
         mode: 'cors',
         method: 'GET',
