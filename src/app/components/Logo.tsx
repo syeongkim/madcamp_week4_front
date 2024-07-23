@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "../components/Image";
 
 interface LogoProps {
   className?: string;
@@ -8,7 +8,7 @@ interface LogoProps {
 function Logo({ className }: LogoProps) {
   return (
     <div className={`logo ${className}`}>
-      <Image src="/images/logo.png" alt="Logo" />
+      <Image src="/images/logo.png" alt="Logo"/>
     </div>
   );
 }

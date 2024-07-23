@@ -17,7 +17,7 @@ const config: Config = {
         "quidditch-background": "url('/images/quidditch_background.jpg')",
         "makepotions-background": "url('/images/makepotions_background.jpg')",
         "spell-background": "url('/images/spell_background.jpg')",
-        owl: "url('/images/owl.png')",
+        "owl": "url('/images/owl.png')",
         "potion-black-market": "url('/images/potion_black_market.png')",
         "paper-background": "url('/images/paper_background.jpg')",
       },

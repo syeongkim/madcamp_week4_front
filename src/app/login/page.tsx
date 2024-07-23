@@ -126,17 +126,17 @@ export default function Login() {
         credentials: 'include',
       });
   
-      console.log(res);
-      const data = await res.json();
-      console.log(data);
+      // console.log(res);
+      // const data = await res.json();
+      // console.log(data);
   
-      if (res.ok) {
-        // 로그인 성공
-        window.location.href = '/dorms';
-      } else {
-        // 로그인 실패
-        setError(data.message);
-      }
+      // if (res.ok) {
+      //   // 로그인 성공
+      //   window.location.href = '/dorms';
+      // } else {
+      //   // 로그인 실패
+      //   setError(data.message);
+      // }
     } catch (e) {
       console.log("error is", e);
     }
