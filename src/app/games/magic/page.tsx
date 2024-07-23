@@ -210,10 +210,11 @@ const Magic: React.FC = () => {
               &times;
             </button>
             <h2 className="text-4xl font-Harry mb-4 text-black">All Spells</h2>
-            <ul className="spell-list overflow-y-auto max-h-80">
+            <ul className="spell-list overflow-y-auto no-scrollbar max-h-96 whitespace-normal">
               {spells.map((spell, index) => (
                 <li key={index} className="mb-2 text-black font-Animales">
-                  <strong>● {spell.name}</strong>: {spell.description}
+                  <strong>● {spell.name}</strong>
+                  <p>{spell.description}</p>
                 </li>
               ))}
             </ul>
