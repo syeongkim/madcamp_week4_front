@@ -92,7 +92,7 @@ const Potion: React.FC = () => {
     });
   };
 
-  const checkRecipe = () => {
+  const checkRecipe = async () => {
     const foundRecipe = recipes.find((recipe) =>
       recipe.ingredients.every((ingredient) =>
         selectedIngredients.includes(ingredient)
@@ -101,6 +101,25 @@ const Potion: React.FC = () => {
 
     if (foundRecipe) {
       setResult(`${foundRecipe.name} is created \n ${foundRecipe.effect}`);
+      try {
+        const response = await fetch(`http://3.34.19.176:8080/api/potions/1`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ potionName: foundRecipe.name }),
+        });
+        const data = await response.json();
+        console.log("Potion added:", data);
+
+        // Update the created potions state
+        setCreatedPotions((prevPotions) => [
+          ...prevPotions,
+          { name: foundRecipe.name, imageUrl: `/images/${foundRecipe.name}.webp` },
+        ]);
+      } catch (error) {
+        console.error("Error adding potion:", error);
+      }
     } else {
       setResult("Wrong combination, try again!");
     }
