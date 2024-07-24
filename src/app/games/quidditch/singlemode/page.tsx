@@ -19,20 +19,26 @@ const SingleMode: React.FC = () => {
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!isGameActive) return;
 
-    const step = 5; // 움직이는 거리 (픽셀 단위)
-    let { top, left } = playerPosition;
+    const step = 5; // Movement step in percentage
+    const gameArea = document.querySelector('.flex-grow')?.getBoundingClientRect();
+    const playerElement = document.getElementById('player');
 
-    if (e.key === 'ArrowUp') {
-      top = Math.max(0, parseFloat(top) - step) + '%';
-    } else if (e.key === 'ArrowDown') {
-      top = Math.min(100, parseFloat(top) + step) + '%';
-    } else if (e.key === 'ArrowLeft') {
-      left = Math.max(0, parseFloat(left) - step) + '%';
-    } else if (e.key === 'ArrowRight') {
-      left = Math.min(100, parseFloat(left) + step) + '%';
+    if (gameArea && playerElement) {
+      let top = (parseFloat(playerPosition.top) / 100) * gameArea.height;
+      let left = (parseFloat(playerPosition.left) / 100) * gameArea.width;
+
+      if (e.key === 'ArrowUp') {
+        top = Math.max(0, top - (step / 100) * gameArea.height);
+      } else if (e.key === 'ArrowDown') {
+        top = Math.min(gameArea.height - playerElement.offsetHeight, top + (step / 100) * gameArea.height);
+      } else if (e.key === 'ArrowLeft') {
+        left = Math.max(0, left - (step / 100) * gameArea.width);
+      } else if (e.key === 'ArrowRight') {
+        left = Math.min(gameArea.width - playerElement.offsetWidth, left + (step / 100) * gameArea.width);
+      }
+
+      setPlayerPosition({ top: `${(top / gameArea.height) * 100}%`, left: `${(left / gameArea.width) * 100}%` });
     }
-
-    setPlayerPosition({ top, left });
   };
 
   const checkCollision = () => {
