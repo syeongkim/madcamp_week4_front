@@ -22,6 +22,9 @@ jobs:
           yarn build
           touch ./out/.nojekyll
 
+      - name: Export static site
+        run: npm run export
+        
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
