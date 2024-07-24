@@ -4,7 +4,7 @@ const prefix =
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  assetPrefix: prefix,
+  assetPrefix: '/madcamp_week4_front',
   basePath: process.env.NODE_ENV === "production" ? "/madcamp_week4_front" : "",
   images: {
     unoptimized: true, // 이미지 최적화 비활성화
