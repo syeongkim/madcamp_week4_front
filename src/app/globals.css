@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: 'Harry P';
-  src: url('/fonts/harry_p.ttf'); /* Adjust the path to your font */
+  src: url('/fonts/harry_p.TTF') format('truetype'); /* Adjust the path to your font */
 }
 
 @font-face {
