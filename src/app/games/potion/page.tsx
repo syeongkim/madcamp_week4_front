@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ingredients from "./ingredient.json";
 import recipes from "./recipe.json";
 import "./styles/potion.css";
@@ -16,7 +16,29 @@ const Potion: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [selectedPotion, setSelectedPotion] = useState<{ name: string; ingredients: string[] } | null>(null);
   const [showPotionCase, setShowPotionCase] = useState<boolean>(false);
-  const createdPotions = ["Beautiflcation Potion", "Gillyweed Potion", "Draught of Living Death", "Felix Felicis", "Polyjuice Potion", "Veritaserum", "Essence of Comfrey"];
+  const [createdPotions, setCreatedPotions] = useState<{ name: string; imageUrl: string; }[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchPotions = async () => {
+      try {
+        const response = await fetch(`http://3.34.19.176:8080/api/potions/1`); // Replace '1' with the appropriate dormId
+        const data = await response.json();
+        const potions = data.map((potion: { potion_name: string }) => ({
+          name: potion.potion_name,
+          imageUrl: `/images/${potion.potion_name}.webp`
+        }));
+        setCreatedPotions(potions);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching potions:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPotions();
+  }, []);
+
   const shelfPositions = [
     { top: '10%', left: '10%' },
     { top: '10%', left: '27%' },
@@ -70,7 +92,7 @@ const Potion: React.FC = () => {
     });
   };
 
-  const checkRecipe = () => {
+  const checkRecipe = async () => {
     const foundRecipe = recipes.find((recipe) =>
       recipe.ingredients.every((ingredient) =>
         selectedIngredients.includes(ingredient)
@@ -79,6 +101,25 @@ const Potion: React.FC = () => {
 
     if (foundRecipe) {
       setResult(`${foundRecipe.name} is created \n ${foundRecipe.effect}`);
+      try {
+        const response = await fetch(`http://3.34.19.176:8080/api/potions/1`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ potionName: foundRecipe.name }),
+        });
+        const data = await response.json();
+        console.log("Potion added:", data);
+
+        // Update the created potions state
+        setCreatedPotions((prevPotions) => [
+          ...prevPotions,
+          { name: foundRecipe.name, imageUrl: `/images/${foundRecipe.name}.webp` },
+        ]);
+      } catch (error) {
+        console.error("Error adding potion:", error);
+      }
     } else {
       setResult("Wrong combination, try again!");
     }
@@ -269,7 +310,7 @@ const Potion: React.FC = () => {
               {/* <h2 className="fixed-title text-4xl text-white font-Harry">Potion Case</h2> */}
 
               {/* Positioning the potions */}
-              {createdPotions.map((potion, index) => (
+              {!loading && createdPotions.map((potion, index) => (
                 <div
                   key={index}
                   className="absolute flex flex-col items-center justify-center w-24 h-24"
@@ -282,8 +323,8 @@ const Potion: React.FC = () => {
                     textAlign: 'center' // Ensure text is centered
                   }}
                 >
-                  <Image src={`/images/${potion}.webp`} alt={potion} className="w-24 h-24 object-cover mb-2 mt-2" />
-                  <p className="text-white text-xs font-Animales text-center">{potion}</p>
+                  <Image src={potion.imageUrl} alt={potion.name} className="w-24 h-24 object-cover mb-2 mt-2" />
+                  <p className="text-white text-xs font-Animales text-center">{potion.name}</p>
                 </div>
               ))}
 
@@ -297,8 +338,6 @@ const Potion: React.FC = () => {
           </div>
         </div>
       )}
-
-
     </div>
   );
 };
