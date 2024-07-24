@@ -44,7 +44,11 @@ export default function Dorm() {
           />
         ))}
       </div>
-      <audio src="/musics/07_Entry_Into_The_Great_Hall_And_The_Banquet.mp3" autoPlay loop />
+      <audio
+        src="https://syeongkim.github.io/madcamp_week4_front/musics/07_Entry_Into_The_Great_Hall_And_The_Banquet.mp3"
+        autoPlay
+        loop
+      />
     </div>
   );
 }

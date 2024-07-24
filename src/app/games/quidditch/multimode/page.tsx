@@ -1,57 +1,69 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
-import '../styles/quidditch.css';
+import React, { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
+import "../styles/quidditch.css";
 
 interface Player {
   position: { top: string; left: string };
   score: number;
 }
 
-const socket: Socket = io('http://localhost:8080'); // 서버 URL
+const socket: Socket = io("http://localhost:8080"); // 서버 URL
 
 const MultiMode: React.FC = () => {
   const [players, setPlayers] = useState<{ [key: string]: Player }>({});
-  const [ballPosition, setBallPosition] = useState({ top: '50%', left: '50%' });
+  const [ballPosition, setBallPosition] = useState({ top: "50%", left: "50%" });
   const [isGameActive, setIsGameActive] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
   const [myId, setMyId] = useState<string | null>(null);
 
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('Connected to server');
+    socket.on("connect", () => {
+      console.log("Connected to server");
       if (socket.id) {
         setMyId(socket.id);
       }
     });
 
-    socket.on('currentPlayers', (players: { [key: string]: Player }) => {
-      console.log('Current players:', players);
+    socket.on("currentPlayers", (players: { [key: string]: Player }) => {
+      console.log("Current players:", players);
       setPlayers(players);
     });
 
-    socket.on('newPlayer', ({ playerId, player }: { playerId: string; player: Player }) => {
-      console.log('New player:', player);
-      setPlayers((prevPlayers) => ({
-        ...prevPlayers,
-        [playerId]: player,
-      }));
-    });
+    socket.on(
+      "newPlayer",
+      ({ playerId, player }: { playerId: string; player: Player }) => {
+        console.log("New player:", player);
+        setPlayers((prevPlayers) => ({
+          ...prevPlayers,
+          [playerId]: player,
+        }));
+      }
+    );
 
-    socket.on('playerMoved', ({ playerId, position }: { playerId: string; position: { top: string; left: string } }) => {
-      console.log('Player moved:', playerId, position);
-      setPlayers((prevPlayers) => ({
-        ...prevPlayers,
-        [playerId]: {
-          ...prevPlayers[playerId],
-          position,
-        },
-      }));
-    });
+    socket.on(
+      "playerMoved",
+      ({
+        playerId,
+        position,
+      }: {
+        playerId: string;
+        position: { top: string; left: string };
+      }) => {
+        console.log("Player moved:", playerId, position);
+        setPlayers((prevPlayers) => ({
+          ...prevPlayers,
+          [playerId]: {
+            ...prevPlayers[playerId],
+            position,
+          },
+        }));
+      }
+    );
 
-    socket.on('playerDisconnected', (playerId: string) => {
-      console.log('Player disconnected:', playerId);
+    socket.on("playerDisconnected", (playerId: string) => {
+      console.log("Player disconnected:", playerId);
       setPlayers((prevPlayers) => {
         const updatedPlayers = { ...prevPlayers };
         delete updatedPlayers[playerId];
@@ -60,17 +72,17 @@ const MultiMode: React.FC = () => {
     });
 
     return () => {
-      socket.off('connect');
-      socket.off('currentPlayers');
-      socket.off('newPlayer');
-      socket.off('playerMoved');
-      socket.off('playerDisconnected');
+      socket.off("connect");
+      socket.off("currentPlayers");
+      socket.off("newPlayer");
+      socket.off("playerMoved");
+      socket.off("playerDisconnected");
     };
   }, []);
 
   const moveBall = () => {
-    const top = Math.random() * 90 + '%';
-    const left = Math.random() * 90 + '%';
+    const top = Math.random() * 90 + "%";
+    const left = Math.random() * 90 + "%";
     setBallPosition({ top, left });
   };
 
@@ -79,16 +91,16 @@ const MultiMode: React.FC = () => {
 
     const step = 5; // 움직이는 거리 (픽셀 단위)
     const player = players[myId];
-    let { top, left } = player?.position || { top: '50%', left: '50%' };
+    let { top, left } = player?.position || { top: "50%", left: "50%" };
 
-    if (e.key === 'ArrowUp') {
-      top = Math.max(0, parseFloat(top) - step) + '%';
-    } else if (e.key === 'ArrowDown') {
-      top = Math.min(100, parseFloat(top) + step) + '%';
-    } else if (e.key === 'ArrowLeft') {
-      left = Math.max(0, parseFloat(left) - step) + '%';
-    } else if (e.key === 'ArrowRight') {
-      left = Math.min(100, parseFloat(left) + step) + '%';
+    if (e.key === "ArrowUp") {
+      top = Math.max(0, parseFloat(top) - step) + "%";
+    } else if (e.key === "ArrowDown") {
+      top = Math.min(100, parseFloat(top) + step) + "%";
+    } else if (e.key === "ArrowLeft") {
+      left = Math.max(0, parseFloat(left) - step) + "%";
+    } else if (e.key === "ArrowRight") {
+      left = Math.min(100, parseFloat(left) + step) + "%";
     }
 
     if (myId) {
@@ -99,7 +111,7 @@ const MultiMode: React.FC = () => {
           position: { top, left },
         },
       }));
-      socket.emit('playerMovement', { position: { top, left } });
+      socket.emit("playerMovement", { position: { top, left } });
     }
   };
 
@@ -111,9 +123,9 @@ const MultiMode: React.FC = () => {
 
   useEffect(() => {
     if (isGameActive) {
-      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener("keydown", handleKeyDown);
       return () => {
-        window.removeEventListener('keydown', handleKeyDown);
+        window.removeEventListener("keydown", handleKeyDown);
       };
     }
   }, [isGameActive, myId, players]);
@@ -131,12 +143,25 @@ const MultiMode: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-quidditch-multi bg-cover bg-center flex flex-col items-center text-center relative">
-      <audio src="/musics/11_The_Quidditch_Match_Game.mp3" autoPlay loop />
-      <h1 className="font-Harry text-gradient-red fixed top-0 w-full">Multi Mode</h1>
-      <div className="fixed top-10 right-10 text-black text-xl font-Harry">Time Left: {timeLeft}s</div>
+      <audio
+        src="https://syeongkim.github.io/madcamp_week4_front/musics/11_The_Quidditch_Match_Game.mp3"
+        autoPlay
+        loop
+      />
+      <h1 className="font-Harry text-gradient-red fixed top-0 w-full">
+        Multi Mode
+      </h1>
+      <div className="fixed top-10 right-10 text-black text-xl font-Harry">
+        Time Left: {timeLeft}s
+      </div>
       <div className="flex-grow flex items-center justify-center relative w-full h-full">
         {!isGameActive && (
-          <button className="btn-start font-Harry text-white text-4xl" onClick={startGame}>Start</button>
+          <button
+            className="btn-start font-Harry text-white text-4xl"
+            onClick={startGame}
+          >
+            Start
+          </button>
         )}
         {isGameActive && (
           <>
@@ -150,7 +175,10 @@ const MultiMode: React.FC = () => {
                 key={playerId}
                 id={playerId}
                 className="player"
-                style={{ top: players[playerId].position.top, left: players[playerId].position.left }}
+                style={{
+                  top: players[playerId].position.top,
+                  left: players[playerId].position.left,
+                }}
               ></div>
             ))}
           </>

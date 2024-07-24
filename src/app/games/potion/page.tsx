@@ -15,10 +15,19 @@ const Potion: React.FC = () => {
   const [showNewModal, setShowNewModal] = useState<boolean>(false);
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
-  const [selectedPotion, setSelectedPotion] = useState<{ name: string; ingredients: string[] } | null>(null);
-  const [selectedDetailPotion, setSelectedDetailPotion] = useState<{ name: string; effect: string; stock: number } | null>(null);
+  const [selectedPotion, setSelectedPotion] = useState<{
+    name: string;
+    ingredients: string[];
+  } | null>(null);
+  const [selectedDetailPotion, setSelectedDetailPotion] = useState<{
+    name: string;
+    effect: string;
+    stock: number;
+  } | null>(null);
   const [showPotionCase, setShowPotionCase] = useState<boolean>(false);
-  const [createdPotions, setCreatedPotions] = useState<{ name: string; imageUrl: string; stock: number; }[]>([]);
+  const [createdPotions, setCreatedPotions] = useState<
+    { name: string; imageUrl: string; stock: number }[]
+  >([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -27,18 +36,26 @@ const Potion: React.FC = () => {
         const response = await fetch(`http://3.34.19.176:8080/api/potions/1`); // Replace '1' with the appropriate dormId
         const data = await response.json();
 
-        const potionCountMap = data.reduce((acc: { [x: string]: any; }, potion: { potion_name: string | number; }) => {
-          acc[potion.potion_name] = (acc[potion.potion_name] || 0) + 1;
-          return acc;
-        }, {});
+        const potionCountMap = data.reduce(
+          (
+            acc: { [x: string]: any },
+            potion: { potion_name: string | number }
+          ) => {
+            acc[potion.potion_name] = (acc[potion.potion_name] || 0) + 1;
+            return acc;
+          },
+          {}
+        );
 
         // Convert the map to an array of objects with name, imageUrl, and stock
-        const potions = Object.entries(potionCountMap).map(([potion_name, stock]) => ({
-          name: potion_name,
-          imageUrl: `/images/${potion_name}.webp`,
-          stock: Number(stock) // Cast stock to number
-        }));
-        
+        const potions = Object.entries(potionCountMap).map(
+          ([potion_name, stock]) => ({
+            name: potion_name,
+            imageUrl: `https://syeongkim.github.io/madcamp_week4_front/images/${potion_name}.webp`,
+            stock: Number(stock), // Cast stock to number
+          })
+        );
+
         setCreatedPotions(potions);
         setLoading(false);
       } catch (error) {
@@ -51,21 +68,21 @@ const Potion: React.FC = () => {
   }, []);
 
   const shelfPositions = [
-    { top: '10%', left: '10%' },
-    { top: '10%', left: '27%' },
-    { top: '10%', left: '45%' },
-    { top: '10%', left: '62%' },
-    { top: '10%', left: '80%' },
-    { top: '50%', left: '10%' },
-    { top: '50%', left: '27%' },
-    { top: '50%', left: '45%' },
-    { top: '50%', left: '62%' },
-    { top: '50%', left: '80%' },
-    { top: '90%', left: '10%' },
-    { top: '90%', left: '27%' },
-    { top: '90%', left: '45%' },
-    { top: '90%', left: '62%' },
-    { top: '90%', left: '80%' }
+    { top: "10%", left: "10%" },
+    { top: "10%", left: "27%" },
+    { top: "10%", left: "45%" },
+    { top: "10%", left: "62%" },
+    { top: "10%", left: "80%" },
+    { top: "50%", left: "10%" },
+    { top: "50%", left: "27%" },
+    { top: "50%", left: "45%" },
+    { top: "50%", left: "62%" },
+    { top: "50%", left: "80%" },
+    { top: "90%", left: "10%" },
+    { top: "90%", left: "27%" },
+    { top: "90%", left: "45%" },
+    { top: "90%", left: "62%" },
+    { top: "90%", left: "80%" },
   ];
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -114,9 +131,9 @@ const Potion: React.FC = () => {
       setResult(`${foundRecipe.name} is created \n ${foundRecipe.effect}`);
       try {
         const response = await fetch(`http://3.34.19.176:8080/api/potions/1`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ potionName: foundRecipe.name }),
         });
@@ -125,13 +142,24 @@ const Potion: React.FC = () => {
 
         // Update the created potions state
         setCreatedPotions((prevPotions) => {
-          const potionExists = prevPotions.find((potion) => potion.name === foundRecipe.name);
+          const potionExists = prevPotions.find(
+            (potion) => potion.name === foundRecipe.name
+          );
           if (potionExists) {
             return prevPotions.map((potion) =>
-              potion.name === foundRecipe.name ? { ...potion, stock: potion.stock + 1 } : potion
+              potion.name === foundRecipe.name
+                ? { ...potion, stock: potion.stock + 1 }
+                : potion
             );
           } else {
-            return [...prevPotions, { name: foundRecipe.name, imageUrl: `/images/${foundRecipe.name}.webp`, stock: 1 }];
+            return [
+              ...prevPotions,
+              {
+                name: foundRecipe.name,
+                imageUrl: `https://syeongkim.github.io/madcamp_week4_front/images/${foundRecipe.name}.webp`,
+                stock: 1,
+              },
+            ];
           }
         });
       } catch (error) {
@@ -147,7 +175,10 @@ const Potion: React.FC = () => {
     setResult(null);
   };
 
-  const handlePotionClick = (recipe: { name: string; ingredients: string[] }) => {
+  const handlePotionClick = (recipe: {
+    name: string;
+    ingredients: string[];
+  }) => {
     setSelectedPotion(recipe);
     setShowNewModal(true);
     setShowDropdown(false);
@@ -161,14 +192,22 @@ const Potion: React.FC = () => {
     const recipe = recipes.find((r) => r.name === potionName);
     const potion = createdPotions.find((p) => p.name === potionName);
     if (recipe && potion) {
-      setSelectedDetailPotion({ name: recipe.name, effect: recipe.effect, stock: potion.stock });
+      setSelectedDetailPotion({
+        name: recipe.name,
+        effect: recipe.effect,
+        stock: potion.stock,
+      });
       setShowDetailModal(true);
     }
   };
 
   return (
     <div className="min-h-screen bg-makepotions-background bg-cover bg-center flex relative">
-      <audio src="/musics/02_Harry's_Wondrous_World.mp3" autoPlay loop />
+      <audio
+        src="https://syeongkim.github.io/madcamp_week4_front/musics/02_Harry's_Wondrous_World.mp3"
+        autoPlay
+        loop
+      />
       <div
         className="ingredients-container overflow-y-auto"
         ref={scrollContainerRef}
@@ -177,10 +216,11 @@ const Potion: React.FC = () => {
         {ingredients.map((ingredient, index) => (
           <div
             key={index}
-            className={`p-1 rounded-lg shadow-lg cursor-pointer relative mb-2 flex flex-col items-center justify-center ${selectedIngredients.includes(ingredient.name)
-              ? "selected-ingredient"
-              : ""
-              }`}
+            className={`p-1 rounded-lg shadow-lg cursor-pointer relative mb-2 flex flex-col items-center justify-center ${
+              selectedIngredients.includes(ingredient.name)
+                ? "selected-ingredient"
+                : ""
+            }`}
             onClick={() => handleIngredientClick(ingredient.name)}
           >
             <div className="w-20 h-20 relative overflow-hidden rounded-md flex items-center justify-center">
@@ -249,7 +289,7 @@ const Potion: React.FC = () => {
       <div className="fixed top-32 right-0 p-4 flex flex-col">
         <button onClick={() => setShowPotionCase(true)}>
           <Image
-            src="/images/potion_case.jpg"
+            src="https://syeongkim.github.io/madcamp_week4_front/images/potion_case.jpg"
             alt="potion"
             className="w-20 h-20 object-cover object-center"
           />
@@ -263,7 +303,9 @@ const Potion: React.FC = () => {
           onClick={() => setShowModal(false)}
         >
           <div onClick={(e) => e.stopPropagation()}>
-            <h2 className="text-4xl">Select the potion for which you want to check the ingredients</h2>
+            <h2 className="text-4xl">
+              Select the potion for which you want to check the ingredients
+            </h2>
             <h4 className="text-2xl">You must pay 10 points to get hint</h4>
             <div className="mt-4">
               <div className="relative inline-block text-left">
@@ -275,7 +317,12 @@ const Potion: React.FC = () => {
                 </button>
                 {showDropdown && (
                   <div className="origin-top-right no-scrollbar absolute left-1/2 transform -translate-x-1/2 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none max-h-60 overflow-y-auto">
-                    <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    <div
+                      className="py-1"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
                       {recipes.map((recipe, index) => (
                         <Dropdown
                           key={index}
@@ -311,7 +358,7 @@ const Potion: React.FC = () => {
             </span>
             <h2 className="text-black text-6xl mb-4">{selectedPotion.name}</h2>
             <p className="text-black text-4xl">
-              {selectedPotion.ingredients.join(', ')}
+              {selectedPotion.ingredients.join(", ")}
             </p>
           </div>
         </div>
@@ -326,34 +373,41 @@ const Potion: React.FC = () => {
             className="p-8 rounded-lg max-w-5xl w-full h-full relative flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
             style={{
-              backgroundImage: `url(/images/potion_case_background.jpg)`,
-              backgroundSize: 'contain', // Use contain to ensure the whole image is visible
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
+              backgroundImage: `url(https://syeongkim.github.io/madcamp_week4_front/images/potion_case_background.jpg)`,
+              backgroundSize: "contain", // Use contain to ensure the whole image is visible
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
             }}
           >
             <div className="potion-case-content w-full h-full relative">
               {/* <h2 className="fixed-title text-4xl text-white font-Harry">Potion Case</h2> */}
 
               {/* Positioning the potions */}
-              {!loading && createdPotions.map((potion, index) => (
-                <div
-                  key={index}
-                  className="absolute flex flex-col items-center justify-center w-24 h-24"
-                  style={{
-                    top: `${shelfPositions[index].top}`, // Adjust these positions based on the image
-                    left: `${shelfPositions[index].left}`, // Adjust these positions based on the image
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    textAlign: 'center' // Ensure text is centered
-                  }}
-                  onClick={() => handlePotionImageClick(potion.name)}
-                >
-                  <Image src={potion.imageUrl} alt={potion.name} className="w-24 h-24 object-cover mb-2 mt-2" />
-                  <p className="text-white text-xs font-Animales text-center">{potion.name}</p>
-                </div>
-              ))}
+              {!loading &&
+                createdPotions.map((potion, index) => (
+                  <div
+                    key={index}
+                    className="absolute flex flex-col items-center justify-center w-24 h-24"
+                    style={{
+                      top: `${shelfPositions[index].top}`, // Adjust these positions based on the image
+                      left: `${shelfPositions[index].left}`, // Adjust these positions based on the image
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      textAlign: "center", // Ensure text is centered
+                    }}
+                    onClick={() => handlePotionImageClick(potion.name)}
+                  >
+                    <Image
+                      src={potion.imageUrl}
+                      alt={potion.name}
+                      className="w-24 h-24 object-cover mb-2 mt-2"
+                    />
+                    <p className="text-white text-xs font-Animales text-center">
+                      {potion.name}
+                    </p>
+                  </div>
+                ))}
 
               <button
                 onClick={() => setShowPotionCase(false)}
@@ -380,9 +434,15 @@ const Potion: React.FC = () => {
             >
               &times;
             </span>
-            <h2 className="text-black text-6xl mb-4">{selectedDetailPotion.name}</h2>
-            <p className="text-black text-4xl mb-2">{selectedDetailPotion.effect}</p>
-            <p className="text-black text-2xl">Stock: {selectedDetailPotion.stock}</p>
+            <h2 className="text-black text-6xl mb-4">
+              {selectedDetailPotion.name}
+            </h2>
+            <p className="text-black text-4xl mb-2">
+              {selectedDetailPotion.effect}
+            </p>
+            <p className="text-black text-2xl">
+              Stock: {selectedDetailPotion.stock}
+            </p>
           </div>
         </div>
       )}

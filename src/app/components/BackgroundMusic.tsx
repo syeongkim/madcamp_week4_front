@@ -9,7 +9,9 @@ const BackgroundMusic: React.FC = () => {
 
   useEffect(() => {
     if (!audioContext) {
-      setAudioContext(new (window.AudioContext || (window as any).webkitAudioContext)());
+      setAudioContext(
+        new (window.AudioContext || (window as any).webkitAudioContext)()
+      );
     }
   }, [audioContext]);
 
@@ -23,24 +25,30 @@ const BackgroundMusic: React.FC = () => {
     switch (pathname) {
       case "/poll":
       case "/signup":
-        audioSrc = "/musics/08_Mr_Longbottom_Flies.mp3";
+        audioSrc =
+          "https://syeongkim.github.io/madcamp_week4_front/musics/08_Mr_Longbottom_Flies.mp3";
         break;
       case "/dorms":
-        audioSrc = "/musics/07_Entry_Into_The_Great_Hall_And_The_Banquet.mp3";
+        audioSrc =
+          "https://syeongkim.github.io/madcamp_week4_front/musics/07_Entry_Into_The_Great_Hall_And_The_Banquet.mp3";
         break;
       case "/potion-game":
-        audioSrc = "/musics/02_Harrys_Wonderous_World.mp3";
+        audioSrc =
+          "https://syeongkim.github.io/madcamp_week4_front/musics/02_Harrys_Wonderous_World.mp3";
         break;
       case "/magic-game":
-        audioSrc = "/musics/19_Hedwigs_Theme.mp3";
+        audioSrc =
+          "https://syeongkim.github.io/madcamp_week4_front/musics/19_Hedwigs_Theme.mp3";
         startTime = 152; // 2:32 in seconds
         break;
       case "/quidditch-game":
-        audioSrc = "/musics/11_The_Quidditch_Match.mp3";
+        audioSrc =
+          "https://syeongkim.github.io/madcamp_week4_front/musics/11_The_Quidditch_Match.mp3";
         endTime = 60; // Example split
         break;
       default:
-        audioSrc = "/musics/01_Prologue.mp3";
+        audioSrc =
+          "https://syeongkim.github.io/madcamp_week4_front/musics/01_Prologue.mp3";
     }
 
     if (audioRef.current) {
@@ -54,7 +62,9 @@ const BackgroundMusic: React.FC = () => {
           await audioRef.current?.play();
 
           if (startTime > 0 || endTime !== null) {
-            const track = audioContext.createMediaElementSource(audioRef.current!);
+            const track = audioContext.createMediaElementSource(
+              audioRef.current!
+            );
             const gainNode = audioContext.createGain();
             track.connect(gainNode).connect(audioContext.destination);
 
@@ -72,16 +82,16 @@ const BackgroundMusic: React.FC = () => {
         }
       };
 
-      document.addEventListener('click', playAudio);
-      document.addEventListener('keydown', playAudio);
+      document.addEventListener("click", playAudio);
+      document.addEventListener("keydown", playAudio);
 
       return () => {
         if (audioRef.current) {
           setCurrentTime(audioRef.current.currentTime);
           audioRef.current.pause();
         }
-        document.removeEventListener('click', playAudio);
-        document.removeEventListener('keydown', playAudio);
+        document.removeEventListener("click", playAudio);
+        document.removeEventListener("keydown", playAudio);
       };
     }
   }, [pathname, audioContext, currentTime]);

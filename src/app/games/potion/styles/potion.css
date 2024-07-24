@@ -54,7 +54,7 @@
 }
 /* 버튼 스타일 */
 .potion-black-market-button {
-  background-image: url("/images/potion_black_market.png");
+  background-image: url("https://syeongkim.github.io/madcamp_week4_front/images/potion_black_market.png");
   width: 90px; /* 원하는 크기로 조정 */
   height: 60px; /* 원하는 크기로 조정 */
   background-size: contain; /* 원본 비율 유지 */
@@ -115,7 +115,8 @@
 }
 
 .new-modal-content {
-  background: url("/images/paper_background.jpg") no-repeat center center;
+  background: url("https://syeongkim.github.io/madcamp_week4_front/images/paper_background.jpg")
+    no-repeat center center;
   padding: 20px;
   border-radius: 8px;
   width: 80%;

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import Logo from "../components/Logo";
@@ -15,10 +15,16 @@ export default function Main() {
           <Button className="text-gradient-yellow">Log in</Button>
         </Link>
         <Link href="/poll">
-          <Button className="text-gradient-yellow">Sign Up: Find Your Hogwarts House</Button>
+          <Button className="text-gradient-yellow">
+            Sign Up: Find Your Hogwarts House
+          </Button>
         </Link>
       </div>
-      <audio src="/musics/01_Prologue.mp3" autoPlay loop />
+      <audio
+        src="https://syeongkim.github.io/madcamp_week4_front/musics/01_Prologue.mp3"
+        autoPlay
+        loop
+      />
     </div>
   );
 }

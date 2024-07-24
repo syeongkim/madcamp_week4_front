@@ -10,13 +10,23 @@ import "../../globals.css";
 import "../styles/dorms.css";
 
 const dormBanners: Record<string, string> = {
-  gryffindor: "/images/gryffindor_banner.png",
-  hufflepuff: "/images/hufflepuff_banner.png",
-  ravenclaw: "/images/ravenclaw_banner.png",
-  slytherin: "/images/slytherin_banner.png",
+  gryffindor:
+    "https://syeongkim.github.io/madcamp_week4_front/images/gryffindor_banner.png",
+  hufflepuff:
+    "https://syeongkim.github.io/madcamp_week4_front/images/hufflepuff_banner.png",
+  ravenclaw:
+    "https://syeongkim.github.io/madcamp_week4_front/images/ravenclaw_banner.png",
+  slytherin:
+    "https://syeongkim.github.io/madcamp_week4_front/images/slytherin_banner.png",
 };
 
-export default function DormDetailPage({ dorm, details }: { dorm: string, details: DormDetail }) {
+export default function DormDetailPage({
+  dorm,
+  details,
+}: {
+  dorm: string;
+  details: DormDetail;
+}) {
   useEffect(() => {
     // 로딩 상태 업데이트
   }, []);

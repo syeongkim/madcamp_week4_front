@@ -8,7 +8,10 @@ interface LogoProps {
 function Logo({ className }: LogoProps) {
   return (
     <div className={`logo ${className}`}>
-      <Image src="/images/logo.png" alt="Logo"/>
+      <Image
+        src="https://syeongkim.github.io/madcamp_week4_front/images/logo.png"
+        alt="Logo"
+      />
     </div>
   );
 }

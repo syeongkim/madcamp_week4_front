@@ -8,10 +8,10 @@
   --background-end-rgb: 255, 255, 255;
   white-space: pre-wrap;
 
-  --color-gryffindor: #7C201C;
-  --color-hufflepuff: #E8CA27;
-  --color-ravenclaw: #3C6985;
-  --color-slytherin: #376E35;
+  --color-gryffindor: #7c201c;
+  --color-hufflepuff: #e8ca27;
+  --color-ravenclaw: #3c6985;
+  --color-slytherin: #376e35;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,18 +23,21 @@
 }
 
 @font-face {
-  font-family: 'Harry P';
-  src: url('/fonts/harry_p.TTF') format('truetype'); /* Adjust the path to your font */
+  font-family: "Harry P";
+  src: url("https://syeongkim.github.io/madcamp_week4_front/fonts/harry_p.TTF")
+    format("truetype"); /* Adjust the path to your font */
 }
 
 @font-face {
-  font-family: 'lumos';
-  src: url('/fonts/LUMOS.ttf') format('truetype'); /* Adjust the path to your font */
+  font-family: "lumos";
+  src: url("https://syeongkim.github.io/madcamp_week4_front/fonts/LUMOS.ttf")
+    format("truetype"); /* Adjust the path to your font */
 }
 
 @font-face {
-  font-family: 'Animales Fantastic';
-  src: url('/fonts/Animales Fantastic.otf') format('truetype'); /* Adjust the path to your font */
+  font-family: "Animales Fantastic";
+  src: url("https://syeongkim.github.io/madcamp_week4_front/fonts/Animales Fantastic.otf")
+    format("truetype"); /* Adjust the path to your font */
 }
 
 body {
@@ -50,21 +53,21 @@ body {
     margin-bottom: 10px;
   }
   .text-gradient-blue {
-    background: linear-gradient(to bottom, #0041FF, #110060);
+    background: linear-gradient(to bottom, #0041ff, #110060);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 80px;
     margin-bottom: 10px;
   }
   .text-gradient-red {
-    background: linear-gradient(to bottom, #9C0000, #2B0600);
+    background: linear-gradient(to bottom, #9c0000, #2b0600);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 80px;
     margin-bottom: 10px;
   }
   .text-gradient-green {
-    background: linear-gradient(to bottom, #02E602, #062C00);
+    background: linear-gradient(to bottom, #02e602, #062c00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 60px;
@@ -74,4 +77,3 @@ body {
     text-wrap: balance;
   }
 }
-

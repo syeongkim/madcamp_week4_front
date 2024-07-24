@@ -12,17 +12,27 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "potion-background": "url('/images/potion_background.jpg')",
-        "magic-background": "url('/images/magic_background.jpg')",
-        "quidditch-background": "url('/images/quidditch_background.jpg')",
-        "makepotions-background": "url('/images/makepotions_background.jpg')",
-        "spell-background": "url('/images/spell_background.jpg')",
-        "owl": "url('/images/owl.png')",
-        "potion-black-market": "url('/images/potion_black_market.png')",
-        "paper-background": "url('/images/paper_background.jpg')",
-        "quidditch-single": "url('/images/quidditch_single.jpg')",
-        "quidditch-multi": "url('/images/quidditch_multi.jpg')",
-        "potion-case-background": "url('/images/potion_case_background.jpg')",
+        "potion-background":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/potion_background.jpg')",
+        "magic-background":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/magic_background.jpg')",
+        "quidditch-background":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/quidditch_background.jpg')",
+        "makepotions-background":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/makepotions_background.jpg')",
+        "spell-background":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/spell_background.jpg')",
+        owl: "url('https://syeongkim.github.io/madcamp_week4_front/images/owl.png')",
+        "potion-black-market":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/potion_black_market.png')",
+        "paper-background":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/paper_background.jpg')",
+        "quidditch-single":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/quidditch_single.jpg')",
+        "quidditch-multi":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/quidditch_multi.jpg')",
+        "potion-case-background":
+          "url('https://syeongkim.github.io/madcamp_week4_front/images/potion_case_background.jpg')",
       },
       backgroundSize: {
         "50%": "50%",

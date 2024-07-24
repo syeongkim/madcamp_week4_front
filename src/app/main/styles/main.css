@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Harry P";
-  src: url("/fonts/harry_p.ttf"); /* Adjust the path to your font */
+  src: url("https://syeongkim.github.io/madcamp_week4_front/fonts/harry_p.ttf"); /* Adjust the path to your font */
 }
 
 *,

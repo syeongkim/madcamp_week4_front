@@ -130,7 +130,11 @@ const SingleMode: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-quidditch-single bg-cover bg-center flex flex-col items-center text-center relative">
-      <audio src="/musics/11_The_Quidditch_Match_Game.mp3" autoPlay loop />
+      <audio
+        src="https://syeongkim.github.io/madcamp_week4_front/musics/11_The_Quidditch_Match_Game.mp3"
+        autoPlay
+        loop
+      />
       <h1 className="font-Harry text-gradient-red fixed top-0 w-full">
         Single Mode
       </h1>
