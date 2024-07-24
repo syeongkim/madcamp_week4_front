@@ -138,6 +138,15 @@
   color: red;
 }
 
+.fixed-title {
+  position: absolute;
+  top: px; /* Adjust as necessary */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10; /* Ensure it stays above other content */
+  text-align: center;
+}
+
 @keyframes paper-fold {
   0% {
     transform: scaleY(0);

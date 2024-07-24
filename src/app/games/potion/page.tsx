@@ -15,6 +15,25 @@ const Potion: React.FC = () => {
   const [showNewModal, setShowNewModal] = useState<boolean>(false);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [selectedPotion, setSelectedPotion] = useState<{ name: string; ingredients: string[] } | null>(null);
+  const [showPotionCase, setShowPotionCase] = useState<boolean>(false);
+  const createdPotions = ["Beautiflcation Potion", "Gillyweed Potion", "Draught of Living Death", "Felix Felicis", "Polyjuice Potion", "Veritaserum", "Essence of Comfrey"];
+  const shelfPositions = [
+    { top: '10%', left: '10%' },
+    { top: '10%', left: '27%' },
+    { top: '10%', left: '45%' },
+    { top: '10%', left: '62%' },
+    { top: '10%', left: '80%' },
+    { top: '50%', left: '10%' },
+    { top: '50%', left: '27%' },
+    { top: '50%', left: '45%' },
+    { top: '50%', left: '62%' },
+    { top: '50%', left: '80%' },
+    { top: '90%', left: '10%' },
+    { top: '90%', left: '27%' },
+    { top: '90%', left: '45%' },
+    { top: '90%', left: '62%' },
+    { top: '90%', left: '80%' }
+  ];
 
   const handleMouseDown = (e: React.MouseEvent) => {
     const container = scrollContainerRef.current;
@@ -101,7 +120,7 @@ const Potion: React.FC = () => {
               <Image
                 src={ingredient.imageUrl}
                 alt={ingredient.name}
-                className="absolute inset-0 w-full h-full object-cover object-center" 
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
               {selectedIngredients.includes(ingredient.name) && (
                 <>
@@ -159,6 +178,16 @@ const Potion: React.FC = () => {
         <text className="mt-3 font-Animales text-xs text-white text-center">
           secret hint
         </text>
+      </div>
+      <div className="fixed top-32 right-0 p-4 flex flex-col">
+        <button onClick={() => setShowPotionCase(true)}>
+          <Image
+            src="/images/potion_case.jpg"
+            alt="potion"
+            className="w-20 h-20 object-cover object-center"
+          />
+          <p className="font-Animales text-white text-xs mt-3">Our Potions</p>
+        </button>
       </div>
 
       {showModal && (
@@ -220,6 +249,56 @@ const Potion: React.FC = () => {
           </div>
         </div>
       )}
+
+      {showPotionCase && (
+        <div
+          className="potion-case-modal fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
+          onClick={() => setShowPotionCase(false)}
+        >
+          <div
+            className="p-8 rounded-lg max-w-5xl w-full h-full relative flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundImage: `url(/images/potion_case_background.jpg)`,
+              backgroundSize: 'contain', // Use contain to ensure the whole image is visible
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <div className="potion-case-content w-full h-full relative">
+              {/* <h2 className="fixed-title text-4xl text-white font-Harry">Potion Case</h2> */}
+
+              {/* Positioning the potions */}
+              {createdPotions.map((potion, index) => (
+                <div
+                  key={index}
+                  className="absolute flex flex-col items-center justify-center w-24 h-24"
+                  style={{
+                    top: `${shelfPositions[index].top}`, // Adjust these positions based on the image
+                    left: `${shelfPositions[index].left}`, // Adjust these positions based on the image
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center' // Ensure text is centered
+                  }}
+                >
+                  <Image src={`/images/${potion}.webp`} alt={potion} className="w-24 h-24 object-cover mb-2 mt-2" />
+                  <p className="text-white text-xs font-Animales text-center">{potion}</p>
+                </div>
+              ))}
+
+              <button
+                onClick={() => setShowPotionCase(false)}
+                className="absolute top-2 right-2 text-black text-2xl font-bold"
+              >
+                &times;
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
     </div>
   );
 };

@@ -35,7 +35,7 @@
     "effect": "Cures boils"
   },
   {
-    "name": "Gillyweed",
+    "name": "Gillyweed Potion",
     "ingredients": ["Gillyweed", "Murtlap Essence", "Beetle"],
     "effect": "Allows the drinker to breathe underwater"
   },
