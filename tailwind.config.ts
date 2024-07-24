@@ -22,6 +22,7 @@ const config: Config = {
         "paper-background": "url('/images/paper_background.jpg')",
         "quidditch-single": "url('/images/quidditch_single.jpg')",
         "quidditch-multi": "url('/images/quidditch_multi.jpg')",
+        "potion-case-background": "url('/images/potion_case_background.jpg')",
       },
       backgroundSize: {
         "50%": "50%",
