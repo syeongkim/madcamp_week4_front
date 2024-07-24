@@ -24,7 +24,7 @@ export default function Login() {
           'Content-Type': 'application/json'
         },
         credentials: 'include',
-      });
+      }); 
   
       console.log(res);
       const data = await res.json();
