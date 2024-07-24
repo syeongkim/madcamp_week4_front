@@ -2,6 +2,7 @@
   "name": "madcamp_week4_front",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://syeongkim.github.io/madcamp_week4_front",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
