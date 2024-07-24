@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import spells from "./spells.json";
 import Button from "../../components/Button";
 import "./styles/magic.css";
+import { updateDormPoints } from "../../services/DormsService";
 
 const Magic: React.FC = () => {
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
@@ -82,7 +83,7 @@ const Magic: React.FC = () => {
     setUserInput(e.target.value);
   };
 
-  const handleCheckAnswer = () => {
+  const handleCheckAnswer = async () => {
     if (selectedSpell) {
       const spellName = selectedSpell.name.toLowerCase();
       const userAnswer = userInput.toLowerCase();
@@ -94,10 +95,29 @@ const Magic: React.FC = () => {
       const isCorrect = spellParts.some((part) => part === userAnswer);
 
       if (isCorrect) {
-        setFeedback("Correct! The owl will give you 1 point each day.");
+        const randomPoints = Math.floor(Math.random() * 41) + 10;
+        setFeedback(
+          `Correct! The owl will give you ${randomPoints} points to your dorm.`
+        );
         setIsModalOpen(true);
+
+        const dormId = localStorage.getItem("dormId");
+
+        if (dormId) {
+          try {
+            // Update points
+            await updateDormPoints(dormId, randomPoints);
+          } catch (error) {
+            console.error("Failed to update dorm points:", error);
+            setFeedback("Correct! But failed to update points.");
+          }
+        } else {
+          console.error("No dormId found in local storage");
+          setFeedback("Correct, but no dorm ID found.");
+        }
       } else {
         setFeedback("Incorrect. Try again!");
+        setIsModalOpen(true); // Show the modal even when the answer is incorrect
       }
     }
   };
@@ -149,7 +169,9 @@ const Magic: React.FC = () => {
       </div>
       {selectedSpell && (
         <div className="font-Animales text-center px-10">
-          <p className="text-xl mt-6">&quot;{selectedSpell.description}&quot;</p>
+          <p className="text-xl mt-6">
+            &quot;{selectedSpell.description}&quot;
+          </p>
           <div className="mt-4 flex items-center">
             <input
               type="text"
@@ -168,12 +190,9 @@ const Magic: React.FC = () => {
           <button onClick={handleCheckAnswer} className="block mx-auto mt-4">
             Check Answer
           </button>
-          <p className="mt-4 text-center text-white">
-            <strong>Speech Result:</strong> {speechResult}
-          </p>
         </div>
       )}
-      {isModalOpen && feedback.startsWith("Correct!") && (
+      {isModalOpen && (
         <div
           className="modal fixed inset-0 flex flex-col pb-24 pt-12 justify-center items-center bg-black bg-opacity-50"
           onClick={handleCloseModal}
@@ -188,10 +207,12 @@ const Magic: React.FC = () => {
             className="relative flex justify-center items-center w-full h-full max-w-screen-md max-h-screen-md"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-owl bg-no-repeat bg-center bg-contain w-full h-full"></div>
+            {feedback.startsWith("Correct!") && (
+              <div className="bg-owl bg-no-repeat bg-center bg-contain w-full h-full"></div>
+            )}
           </div>
           <p className="text-white text-center mb-12 font-Harry text-5xl">
-            Correct! Your owl will give you 1 point each day.
+            {feedback}
           </p>
         </div>
       )}
