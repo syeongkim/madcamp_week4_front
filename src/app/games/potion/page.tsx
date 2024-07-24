@@ -13,10 +13,12 @@ const Potion: React.FC = () => {
   const [result, setResult] = useState<string | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showNewModal, setShowNewModal] = useState<boolean>(false);
+  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [selectedPotion, setSelectedPotion] = useState<{ name: string; ingredients: string[] } | null>(null);
+  const [selectedDetailPotion, setSelectedDetailPotion] = useState<{ name: string; effect: string; stock: number } | null>(null);
   const [showPotionCase, setShowPotionCase] = useState<boolean>(false);
-  const [createdPotions, setCreatedPotions] = useState<{ name: string; imageUrl: string; }[]>([]);
+  const [createdPotions, setCreatedPotions] = useState<{ name: string; imageUrl: string; stock: number; }[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -24,10 +26,19 @@ const Potion: React.FC = () => {
       try {
         const response = await fetch(`http://3.34.19.176:8080/api/potions/1`); // Replace '1' with the appropriate dormId
         const data = await response.json();
-        const potions = data.map((potion: { potion_name: string }) => ({
-          name: potion.potion_name,
-          imageUrl: `/images/${potion.potion_name}.webp`
+
+        const potionCountMap = data.reduce((acc: { [x: string]: any; }, potion: { potion_name: string | number; }) => {
+          acc[potion.potion_name] = (acc[potion.potion_name] || 0) + 1;
+          return acc;
+        }, {});
+
+        // Convert the map to an array of objects with name, imageUrl, and stock
+        const potions = Object.entries(potionCountMap).map(([potion_name, stock]) => ({
+          name: potion_name,
+          imageUrl: `/images/${potion_name}.webp`,
+          stock: Number(stock) // Cast stock to number
         }));
+        
         setCreatedPotions(potions);
         setLoading(false);
       } catch (error) {
@@ -113,10 +124,16 @@ const Potion: React.FC = () => {
         console.log("Potion added:", data);
 
         // Update the created potions state
-        setCreatedPotions((prevPotions) => [
-          ...prevPotions,
-          { name: foundRecipe.name, imageUrl: `/images/${foundRecipe.name}.webp` },
-        ]);
+        setCreatedPotions((prevPotions) => {
+          const potionExists = prevPotions.find((potion) => potion.name === foundRecipe.name);
+          if (potionExists) {
+            return prevPotions.map((potion) =>
+              potion.name === foundRecipe.name ? { ...potion, stock: potion.stock + 1 } : potion
+            );
+          } else {
+            return [...prevPotions, { name: foundRecipe.name, imageUrl: `/images/${foundRecipe.name}.webp`, stock: 1 }];
+          }
+        });
       } catch (error) {
         console.error("Error adding potion:", error);
       }
@@ -138,6 +155,15 @@ const Potion: React.FC = () => {
       setShowNewModal(false);
       setSelectedPotion(null);
     }, 5000);
+  };
+
+  const handlePotionImageClick = (potionName: string) => {
+    const recipe = recipes.find((r) => r.name === potionName);
+    const potion = createdPotions.find((p) => p.name === potionName);
+    if (recipe && potion) {
+      setSelectedDetailPotion({ name: recipe.name, effect: recipe.effect, stock: potion.stock });
+      setShowDetailModal(true);
+    }
   };
 
   return (
@@ -322,6 +348,7 @@ const Potion: React.FC = () => {
                     alignItems: 'center',
                     textAlign: 'center' // Ensure text is centered
                   }}
+                  onClick={() => handlePotionImageClick(potion.name)}
                 >
                   <Image src={potion.imageUrl} alt={potion.name} className="w-24 h-24 object-cover mb-2 mt-2" />
                   <p className="text-white text-xs font-Animales text-center">{potion.name}</p>
@@ -335,6 +362,27 @@ const Potion: React.FC = () => {
                 &times;
               </button>
             </div>
+          </div>
+        </div>
+      )}
+      {showDetailModal && selectedDetailPotion && (
+        <div
+          className="detail-modal font-Harry text-white text-center"
+          onClick={() => setShowDetailModal(false)}
+        >
+          <div
+            className="detail-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span
+              onClick={() => setShowDetailModal(false)}
+              className="detail-modal-close text-black"
+            >
+              &times;
+            </span>
+            <h2 className="text-black text-6xl mb-4">{selectedDetailPotion.name}</h2>
+            <p className="text-black text-4xl mb-2">{selectedDetailPotion.effect}</p>
+            <p className="text-black text-2xl">Stock: {selectedDetailPotion.stock}</p>
           </div>
         </div>
       )}
