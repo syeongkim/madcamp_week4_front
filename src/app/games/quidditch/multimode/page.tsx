@@ -18,47 +18,6 @@ const MultiMode: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState(30);
   const [myId, setMyId] = useState<string | null>(null);
 
-  const moveBall = () => {
-    const top = Math.random() * 90 + '%';
-    const left = Math.random() * 90 + '%';
-    setBallPosition({ top, left });
-  };
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (!isGameActive || !myId) return;
-
-    const step = 5; // 움직이는 거리 (픽셀 단위)
-    const player = players[myId];
-    let { top, left } = player?.position || { top: '50%', left: '50%' };
-
-    if (e.key === 'ArrowUp') {
-      top = Math.max(0, parseFloat(top) - step) + '%';
-    } else if (e.key === 'ArrowDown') {
-      top = Math.min(100, parseFloat(top) + step) + '%';
-    } else if (e.key === 'ArrowLeft') {
-      left = Math.max(0, parseFloat(left) - step) + '%';
-    } else if (e.key === 'ArrowRight') {
-      left = Math.min(100, parseFloat(left) + step) + '%';
-    }
-
-    if (myId) {
-      setPlayers((prevPlayers) => ({
-        ...prevPlayers,
-        [myId]: {
-          ...prevPlayers[myId],
-          position: { top, left },
-        },
-      }));
-      socket.emit('playerMovement', { position: { top, left } });
-    }
-  };
-
-  const startGame = () => {
-    setIsGameActive(true);
-    setTimeLeft(30);
-    moveBall();
-  };
-
   useEffect(() => {
     socket.on('connect', () => {
       console.log('Connected to server');
@@ -108,6 +67,47 @@ const MultiMode: React.FC = () => {
       socket.off('playerDisconnected');
     };
   }, []);
+
+  const moveBall = () => {
+    const top = Math.random() * 90 + '%';
+    const left = Math.random() * 90 + '%';
+    setBallPosition({ top, left });
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (!isGameActive || !myId) return;
+
+    const step = 5; // 움직이는 거리 (픽셀 단위)
+    const player = players[myId];
+    let { top, left } = player?.position || { top: '50%', left: '50%' };
+
+    if (e.key === 'ArrowUp') {
+      top = Math.max(0, parseFloat(top) - step) + '%';
+    } else if (e.key === 'ArrowDown') {
+      top = Math.min(100, parseFloat(top) + step) + '%';
+    } else if (e.key === 'ArrowLeft') {
+      left = Math.max(0, parseFloat(left) - step) + '%';
+    } else if (e.key === 'ArrowRight') {
+      left = Math.min(100, parseFloat(left) + step) + '%';
+    }
+
+    if (myId) {
+      setPlayers((prevPlayers) => ({
+        ...prevPlayers,
+        [myId]: {
+          ...prevPlayers[myId],
+          position: { top, left },
+        },
+      }));
+      socket.emit('playerMovement', { position: { top, left } });
+    }
+  };
+
+  const startGame = () => {
+    setIsGameActive(true);
+    setTimeLeft(30);
+    moveBall();
+  };
 
   useEffect(() => {
     if (isGameActive) {
