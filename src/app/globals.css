@@ -57,10 +57,10 @@ body {
     margin-bottom: 10px;
   }
   .text-gradient-red {
-    background: linear-gradient(to bottom, #FF2300, #2D0600);
+    background: linear-gradient(to bottom, #9C0000, #2B0600);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 60px;
+    font-size: 80px;
     margin-bottom: 10px;
   }
   .text-gradient-green {

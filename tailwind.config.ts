@@ -20,6 +20,8 @@ const config: Config = {
         "owl": "url('/images/owl.png')",
         "potion-black-market": "url('/images/potion_black_market.png')",
         "paper-background": "url('/images/paper_background.jpg')",
+        "quidditch-single": "url('/images/quidditch_single.jpg')",
+        "quidditch-multi": "url('/images/quidditch_multi.jpg')",
       },
       backgroundSize: {
         "50%": "50%",
