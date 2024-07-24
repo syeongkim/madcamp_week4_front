@@ -16,7 +16,7 @@ const Quidditch: React.FC = () => {
           </Link>
         </div>
       </div>
-      <audio src="/musics/11_The_Quidditch_Match_Game.mp3" autoPlay loop />
+      <audio src="/musics/11_The_Quidditch_Match_Select.mp3" autoPlay loop />
     </div>
   );
 };
