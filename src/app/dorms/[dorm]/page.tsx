@@ -1,15 +1,14 @@
-"use client";
+// src/app/dorms/[dorm]/page.tsx
 
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 
 import FlagImage from "../../components/FlagImage";
 import { fetchDormDetails, DormDetail } from "../../services/DormsService";
 
-import "../../globals.css";
-import "../styles/dorms.css";
+import "../../../globals.css";
+import "../../styles/dorms.css";
 
 const dormBanners: Record<string, string> = {
   gryffindor: "/images/gryffindor_banner.png",
@@ -25,31 +24,43 @@ const dormIds: Record<string, number> = {
   slytherin: 4,
 };
 
-export default function DormDetailPage() {
-  const params = useParams();
-  const router = useRouter();
-  const dorm = params?.dorm as string;
+// generateStaticParams 함수 추가
+export async function generateStaticParams() {
+  const dorms = Object.keys(dormIds);
+  return dorms.map(dorm => ({
+    dorm,
+  }));
+}
 
-  const [details, setDetails] = useState<DormDetail | null>(null);
+// getStaticProps 함수 추가
+import { GetStaticPropsContext } from "next";
+
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const dorm = params?.dorm;
+  const dormLower = Array.isArray(dorm) ? dorm[0]?.toLowerCase() : dorm?.toLowerCase();
+  const dormId = dormLower ? dormIds[dormLower] : undefined;
+  let details = null;
+  if (dormId) {
+    try {
+      details = await fetchDormDetails(dormId.toString());
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  return {
+    props: {
+      dorm,
+      details,
+    },
+  };
+}
+
+export default function DormDetailPage({ dorm }: { dorm: string }, details: any) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      const dormLower = dorm.toLowerCase();
-      const dormId = dormIds[dormLower];
-      if (dormId) {
-        try {
-          const dormDetails = await fetchDormDetails(dormId.toString());
-          setDetails(dormDetails);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      setLoading(false);
-    };
-
-    fetchDetails();
-  }, [dorm]);
+    setLoading(false);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -85,7 +96,7 @@ export default function DormDetailPage() {
       </Link>
       <div className="scrolling-names-container absolute top-0 left-0 w-full z-20">
         <div className="scrolling-names">
-          {details.students.concat(details.students).map((student, index) => (
+          {details.students.concat(details.students).map((student: string, index: Key | null | undefined) => (
             <span key={index}>{student}</span>
           ))}
         </div>
