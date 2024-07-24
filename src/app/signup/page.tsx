@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from 'next/navigation';
 import Logo from "../components/Logo";
 import Button from "../components/Button";
@@ -13,7 +13,7 @@ const dormMapping: { [key: string]: number } = {
   Slytherin: 4
 };
 
-const SignUp = () => {
+const SignUpComponent = () => {
   const searchParams = useSearchParams();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -125,6 +125,14 @@ const SignUp = () => {
         </form>
       </div>
     </div>
+  );
+}
+
+const SignUp = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpComponent />
+    </Suspense>
   );
 }
 
