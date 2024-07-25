@@ -3,18 +3,10 @@ export type DormDetail = {
   points: number;
   students: string[];
 };
-
-export async function fetchDormDetails(dormId: string): Promise<DormDetail> {
-  console.log("fetchDormDetails", dormId);
+export async function fetchDormDetails(dormId: number): Promise<DormDetail> {
   const response = await fetch(
-    `https://hogwart.paulupa.com/api/dorms/${dormId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
+    `https://hogwart.paulupa.com/api/dorms/${dormId}`
   );
-  console.log(`https://hogwart.paulupa.com/api/dorms/${dormId}`)
-  // console.log("fetchDormDetails response", response);
   if (!response.ok) {
     throw new Error("Failed to fetch dorm details");
   }
