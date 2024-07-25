@@ -4,47 +4,31 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import FlagImage from "../../components/FlagImage";
-import { DormDetail, fetchDormDetails } from "../../services/DormsService";
+import { DormDetail } from "../../services/DormsService";
 import "../../globals.css";
 import "../styles/dorms.css";
 
-const dormBanners: Record<string, string> = {
-  gryffindor:
-    "https://syeongkim.github.io/madcamp_week4_front/images/gryffindor_banner.png",
-  hufflepuff:
-    "https://syeongkim.github.io/madcamp_week4_front/images/hufflepuff_banner.png",
-  ravenclaw:
-    "https://syeongkim.github.io/madcamp_week4_front/images/ravenclaw_banner.png",
-  slytherin:
-    "https://syeongkim.github.io/madcamp_week4_front/images/slytherin_banner.png",
-};
-
-export default function DormDetailPage({
-  dorm,
-}: {
-  dorm: string;
-}) {
-  const [details, setDetails] = useState<DormDetail | null>(null);
+const Gryffindor: React.FC = () => {
+  const [details, setDetails] = useState<DormDetail>({ points: 0, students: [] });
 
   useEffect(() => {
     const fetchDetails = async () => {
-      const dormId = localStorage.getItem("dormId");
-      if (dormId) {
-        const fetchedDetails = await fetchDormDetails(dormId);
-        setDetails(fetchedDetails);
-      }
+      const response = await fetch(
+        `https://hogwart.paulupa.com/api/dorms/1`
+        ); // Replace '1' with the appropriate dormId
+      const data = await response.json();
+      setDetails({
+        points: data.dorm_score || 0,
+        students: data.students || [],
+      });
     };
 
     fetchDetails();
   }, []);
 
-  if (!details) {
-    return <div>Loading...</div>;
-  }
-
-  const dormTitle = dorm.toUpperCase();
-  const dormClass = `text-shadow-${dorm.toLowerCase()}`;
-  const bannerSrc = dormBanners[dorm.toLowerCase()];
+  const dormTitle = "Slytherin";
+  const dormClass = `text-shadow-slytherin`;
+  const bannerSrc = "https://syeongkim.github.io/madcamp_week4_front/images/slytherin_banner.png"
 
   return (
     <div className="h-screen bg-white relative">
@@ -85,3 +69,5 @@ export default function DormDetailPage({
     </div>
   );
 }
+
+export default Gryffindor;
