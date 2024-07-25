@@ -4,32 +4,23 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import FlagImage from "../../components/FlagImage";
-import { DormDetail } from "../../services/DormsService";
+import { DormDetail, fetchDormDetails } from "../../services/DormsService";
 import "../../globals.css";
 import "../styles/dorms.css";
 
 const Gryffindor: React.FC = () => {
-  const [details, setDetails] = useState<DormDetail>({ points: 0, students: [] });
-
+  const [details, setDetails] = useState<DormDetail>({
+    points: 0,
+    students: [],
+  });
   useEffect(() => {
+    // Fetch the dorm details when the component mounts
     const fetchDetails = async () => {
       try {
-        const response = await fetch(
-            `https://hogwart.paulupa.com/api/dorms/1`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-            ); // Replace '1' with the appropriate dormId
-          console.log(response);
-          const data = await response.json();
-          console.log(data);
-          setDetails({
-            points: data.dorm_score || 0,
-            students: data.students || [],
-          });
-      } catch (e) {
-        console.log(e);
+        const data = await fetchDormDetails(1); // Call the function with the dormId
+        setDetails(data);
+      } catch (error) {
+        console.error("Failed to fetch dorm details:", error);
       }
     };
 
@@ -38,7 +29,8 @@ const Gryffindor: React.FC = () => {
 
   const dormTitle = "Gryffindor";
   const dormClass = `text-shadow-gryffindor`;
-  const bannerSrc = "https://syeongkim.github.io/madcamp_week4_front/images/gryffindor_banner.png"
+  const bannerSrc =
+    "https://syeongkim.github.io/madcamp_week4_front/images/gryffindor_banner.png";
 
   return (
     <div className="h-screen bg-white relative">
@@ -78,6 +70,6 @@ const Gryffindor: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Gryffindor;
