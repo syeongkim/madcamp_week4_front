@@ -54,7 +54,7 @@ const SignUpComponent = () => {
         console.log("User created successfully:", data);
         localStorage.setItem("username", username);
         localStorage.setItem("userDormId", dormMapping[dorm].toString());
-        window.location.href = `/dorms/${dorm}`;
+        window.location.href = `madcamp_week4_front/dorms/${dorm}`;
       } else {
         const errorData = await response.json();
         console.error("Error creating user:", errorData);
