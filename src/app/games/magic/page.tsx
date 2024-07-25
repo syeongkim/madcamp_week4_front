@@ -106,7 +106,7 @@ const Magic: React.FC = () => {
         if (dormId) {
           try {
             // Update points
-            await updateDormPoints(dormId, randomPoints);
+            await updateDormPoints(dormId, randomPoints, "add");
           } catch (error) {
             console.error("Failed to update dorm points:", error);
             setFeedback("Correct! But failed to update points.");

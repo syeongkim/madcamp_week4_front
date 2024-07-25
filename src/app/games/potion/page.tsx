@@ -210,16 +210,6 @@ const Potion: React.FC = () => {
         if (potion && potion.score.includes("*")) {
           updateDormPoints(myDormId, parseFloat(potion.score.replace("*", "")), "multiply");
         } else {
-
-          if (recipe.score.includes("*")) {
-            // 점수 곱하기 로직 추가
-          } else {
-            console.log("___", parseInt(recipe.score.replace("+", "")));
-            updateDormPoints(
-              myDormId,
-              parseInt(recipe.score.replace("+", "")),
-              "add"
-            );
           if (potion) {
             updateDormPoints(myDormId, parseInt(potion.score.replace("+", "")), "add");
 

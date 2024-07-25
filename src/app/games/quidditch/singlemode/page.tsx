@@ -119,7 +119,7 @@ const SingleMode: React.FC = () => {
       // 게임이 끝나면 점수 업데이트
       const dormId = localStorage.getItem("dormId");
       if (dormId) {
-        updateDormPoints(dormId, score).catch((error) => {
+        updateDormPoints(dormId, score, "add").catch((error) => {
           console.error("Failed to update dorm points:", error);
         });
       } else {
