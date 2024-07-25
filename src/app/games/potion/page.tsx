@@ -54,7 +54,9 @@ const Potion: React.FC = () => {
     const fetchPotions = async () => {
       try {
         const dormId = localStorage.getItem("dormId");
-        const response = await fetch(`http://localhost:8080/api/potions/${dormId}`); // Replace '1' with the appropriate dormId
+        const response = await fetch(
+          `https://hogwart.paulupa.com/api/potions/${dormId}`
+        ); // Replace '1' with the appropriate dormId
         const data = await response.json();
 
         const potionCountMap = data.reduce(
@@ -152,13 +154,16 @@ const Potion: React.FC = () => {
       setFoundRecipe(recipe);
       setResult(`${recipe.name} is created \n ${recipe.effect}`);
       try {
-        const response = await fetch(`http://3.34.19.176:8080/api/potions/1`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ potionName: recipe.name }),
-        });
+        const response = await fetch(
+          `https://hogwart.paulupa.com/api/potions/1`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ potionName: recipe.name }),
+          }
+        );
         const data = await response.json();
         console.log("Potion added:", data);
 
@@ -205,8 +210,19 @@ const Potion: React.FC = () => {
         if (potion && potion.score.includes("*")) {
           updateDormPoints(myDormId, parseFloat(potion.score.replace("*", "")), "multiply");
         } else {
+
+          if (recipe.score.includes("*")) {
+            // 점수 곱하기 로직 추가
+          } else {
+            console.log("___", parseInt(recipe.score.replace("+", "")));
+            updateDormPoints(
+              myDormId,
+              parseInt(recipe.score.replace("+", "")),
+              "add"
+            );
           if (potion) {
             updateDormPoints(myDormId, parseInt(potion.score.replace("+", "")), "add");
+
           }
         }
       }
@@ -215,14 +231,16 @@ const Potion: React.FC = () => {
     } catch (e) {
       console.error("Error updating points:", e);
     }
+
   }
+
   // 기숙사 선택 후 효과를 적용하는 함수
   const applyEffectToDorm = async (dorm: string) => {
     const dormMapping: { [key: string]: number } = {
-      "Gryffindor": 1,
-      "Hufflepuff": 2,
-      "Ravenclaw": 3,
-      "Slytherin": 4,
+      Gryffindor: 1,
+      Hufflepuff: 2,
+      Ravenclaw: 3,
+      Slytherin: 4,
     };
 
     const dormId = dormMapping[dorm];
@@ -236,6 +254,7 @@ const Potion: React.FC = () => {
           if (potion) {
             updateDormPoints(dormId.toString(), parseInt(potion.score.replace("+", "")), "add");
           }
+
         }
         setShowDormSelection(false); // 기숙사 선택 UI를 숨깁니다.
       }
@@ -290,10 +309,11 @@ const Potion: React.FC = () => {
         {ingredients.map((ingredient, index) => (
           <div
             key={index}
-            className={`p-1 rounded-lg shadow-lg cursor-pointer relative mb-2 flex flex-col items-center justify-center ${selectedIngredients.includes(ingredient.name)
-              ? "selected-ingredient"
-              : ""
-              }`}
+            className={`p-1 rounded-lg shadow-lg cursor-pointer relative mb-2 flex flex-col items-center justify-center ${
+              selectedIngredients.includes(ingredient.name)
+                ? "selected-ingredient"
+                : ""
+            }`}
             onClick={() => handleIngredientClick(ingredient.name)}
           >
             <div className="w-20 h-20 relative overflow-hidden rounded-md flex items-center justify-center">

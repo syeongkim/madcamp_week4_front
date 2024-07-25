@@ -5,7 +5,9 @@ export type DormDetail = {
 };
 
 export async function fetchDormDetails(dormId: string): Promise<DormDetail> {
-  const response = await fetch(`http://3.34.19.176:8080/api/dorms/${dormId}`);
+  const response = await fetch(
+    `https://hogwart.paulupa.com/api/dorms/${dormId}`
+  );
   if (!response.ok) {
     throw new Error("Failed to fetch dorm details");
   }
@@ -21,13 +23,16 @@ export async function updateDormPoints(
   dormScore: number,
   operation: "add" | "multiply"
 ): Promise<void> {
-  const response = await fetch(`http://localhost:8080/api/dorms/${dormId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ dormScore, operation }),
-  });
+  const response = await fetch(
+    `https://hogwart.paulupa.com/api/dorms/${dormId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ dormScore, operation }),
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Failed to update points");
