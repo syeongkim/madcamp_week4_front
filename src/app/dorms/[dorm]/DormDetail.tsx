@@ -1,7 +1,6 @@
-// src/app/dorms/[dorm]/DormDetail.tsx
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import FlagImage from "../../components/FlagImage";
@@ -20,19 +19,27 @@ const dormBanners: Record<string, string> = {
     "https://syeongkim.github.io/madcamp_week4_front/images/slytherin_banner.png",
 };
 
-export default async function DormDetailPage({
+export default function DormDetailPage({
   dorm,
 }: {
   dorm: string;
 }) {
+  const [details, setDetails] = useState<DormDetail | null>(null);
+
   useEffect(() => {
-    // 로딩 상태 업데이트
+    const fetchDetails = async () => {
+      const dormId = localStorage.getItem("userDormId");
+      if (dormId) {
+        const fetchedDetails = await fetchDormDetails(dormId);
+        setDetails(fetchedDetails);
+      }
+    };
+
+    fetchDetails();
   }, []);
-  const dormId = localStorage.getItem("dormId");
-  const details = await fetchDormDetails(dormId || "");
 
   if (!details) {
-    return <div>No details found for this dorm.</div>;
+    return <div>Loading...</div>;
   }
 
   const dormTitle = dorm.toUpperCase();

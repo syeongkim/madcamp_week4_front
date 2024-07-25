@@ -7,10 +7,14 @@ export type DormDetail = {
 export async function fetchDormDetails(dormId: string): Promise<DormDetail> {
   console.log("fetchDormDetails", dormId);
   const response = await fetch(
-    `https://hogwart.paulupa.com/api/dorms/${dormId}`
+    `https://hogwart.paulupa.com/api/dorms/${dormId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
   );
   console.log(`https://hogwart.paulupa.com/api/dorms/${dormId}`)
-  console.log("fetchDormDetails response", response);
+  // console.log("fetchDormDetails response", response);
   if (!response.ok) {
     throw new Error("Failed to fetch dorm details");
   }
