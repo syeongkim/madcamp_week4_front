@@ -53,7 +53,7 @@ const Potion: React.FC = () => {
   useEffect(() => {
     const fetchPotions = async () => {
       try {
-        const dormId = localStorage.getItem("dormId");
+        const dormId = parseInt(localStorage.getItem("dormId") ?? "");
         const response = await fetch(
           `https://hogwart.paulupa.com/api/potions/${dormId}`
         ); // Replace '1' with the appropriate dormId
@@ -153,9 +153,10 @@ const Potion: React.FC = () => {
     if (recipe) {
       setFoundRecipe(recipe);
       setResult(`${recipe.name} is created \n ${recipe.effect}`);
+      const dormId = localStorage.getItem("dormId");
       try {
         const response = await fetch(
-          `https://hogwart.paulupa.com/api/potions/1`,
+          `https://hogwart.paulupa.com/api/potions/${dormId}`,
           {
             method: "POST",
             headers: {
@@ -258,10 +259,15 @@ const Potion: React.FC = () => {
     setResult(null);
   };
 
-  const handlePotionClick = (recipe: {
+  const handlePotionClick = async (recipe: {
     name: string;
     ingredients: string[];
   }) => {
+    const dormId = localStorage.getItem("dormId");
+    if (dormId) {
+      console.log("minus credit")
+      await updateDormPoints(dormId, -10, "add");
+    }
     setSelectedPotion(recipe);
     setShowNewModal(true);
     setShowDropdown(false);

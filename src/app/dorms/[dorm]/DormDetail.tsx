@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import FlagImage from "../../components/FlagImage";
-import { DormDetail } from "../../services/DormsService";
+import { DormDetail, fetchDormDetails } from "../../services/DormsService";
 import "../../globals.css";
 import "../styles/dorms.css";
 
@@ -20,16 +20,16 @@ const dormBanners: Record<string, string> = {
     "https://syeongkim.github.io/madcamp_week4_front/images/slytherin_banner.png",
 };
 
-export default function DormDetailPage({
+export default async function DormDetailPage({
   dorm,
-  details,
 }: {
   dorm: string;
-  details: DormDetail;
 }) {
   useEffect(() => {
     // 로딩 상태 업데이트
   }, []);
+  const dormId = localStorage.getItem("dormId");
+  const details = await fetchDormDetails(dormId || "");
 
   if (!details) {
     return <div>No details found for this dorm.</div>;

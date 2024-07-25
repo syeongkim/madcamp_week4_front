@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
 import "./styles/signup.css"; // Tailwind CSS는 별도로 구성되어야 함
@@ -53,8 +54,7 @@ const SignUpComponent = () => {
         const data = await response.json();
         console.log("User created successfully:", data);
         localStorage.setItem("username", username);
-        localStorage.setItem("userDormId", dormMapping[dorm].toString());
-        window.location.href = `madcamp_week4_front/dorms/${dorm}`;
+        localStorage.setItem("dormId", dormMapping[dorm].toString());
       } else {
         const errorData = await response.json();
         console.error("Error creating user:", errorData);
@@ -70,7 +70,7 @@ const SignUpComponent = () => {
         <div className="mb-6 text-center">
           <Logo />
         </div>
-        <form className="space-y-6 font-Animales" onSubmit={handleSignUp}>
+        <form className="space-y-6 font-Animales">
           <div>
             <label
               htmlFor="username"
@@ -126,12 +126,15 @@ const SignUpComponent = () => {
             />
           </div>
           <div>
-            <Button
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600"
-              type="submit"
-            >
-              Sign Up
-            </Button>
+            <Link href={`dorms/${dorm.toLowerCase()}`}>
+              <Button
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600"
+                type="submit"
+                onClick={() => handleSignUp}
+              >
+                Sign Up
+              </Button>
+            </Link>
           </div>
         </form>
       </div>
