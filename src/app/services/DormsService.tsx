@@ -21,7 +21,7 @@ export async function updateDormPoints(
   dormScore: number,
   operation: "add" | "multiply"
 ): Promise<void> {
-  const response = await fetch(`http://3.34.19.176:8080/api/dorms/${dormId}`, {
+  const response = await fetch(`http://localhost:8080/api/dorms/${dormId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
