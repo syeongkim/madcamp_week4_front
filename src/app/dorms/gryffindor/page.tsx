@@ -16,12 +16,15 @@ const Gryffindor: React.FC = () => {
   useEffect(() => {
     // Fetch the dorm details when the component mounts
     const fetchDetails = async () => {
-      try {
-        const data = await fetchDormDetails(1); // Call the function with the dormId
-        setDetails(data);
-      } catch (error) {
-        console.error("Failed to fetch dorm details:", error);
-      }
+      // try {
+      //   const data = await fetchDormDetails(1); // Call the function with the dormId
+      // } catch (error) {
+      //   console.error("Failed to fetch dorm details:", error);
+      // }
+      setDetails({
+        points: 500,
+        students: ["Harry Potter", "Hermione Granger", "Ron Weasley", "Steven Cho", "Ashley Kang"],
+      });
     };
 
     fetchDetails();
