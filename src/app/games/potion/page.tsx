@@ -53,7 +53,7 @@ const Potion: React.FC = () => {
   useEffect(() => {
     const fetchPotions = async () => {
       try {
-        const dormId = localStorage.getItem("dormId");
+        const dormId = parseInt(localStorage.getItem("dormId") ?? "");
         const response = await fetch(
           `https://hogwart.paulupa.com/api/potions/${dormId}`
         ); // Replace '1' with the appropriate dormId
