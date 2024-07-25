@@ -28,5 +28,5 @@ export default async function Page({ params }: PageProps) {
   const details = await fetchDormDetails(dormIds[dorm].toString());
   console.log(dorm, details);
 
-  return <DormDetailPage dorm={dorm} details={details} />;
+  return <DormDetailPage dorm={dorm} />;
 }
