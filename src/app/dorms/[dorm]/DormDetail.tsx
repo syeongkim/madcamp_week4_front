@@ -28,7 +28,7 @@ export default function DormDetailPage({
 
   useEffect(() => {
     const fetchDetails = async () => {
-      const dormId = localStorage.getItem("userDormId");
+      const dormId = localStorage.getItem("dormId");
       if (dormId) {
         const fetchedDetails = await fetchDormDetails(dormId);
         setDetails(fetchedDetails);
