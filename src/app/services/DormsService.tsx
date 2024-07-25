@@ -18,14 +18,15 @@ export async function fetchDormDetails(dormId: string): Promise<DormDetail> {
 
 export async function updateDormPoints(
   dormId: string,
-  dormScore: number
+  dormScore: number,
+  operation: "add" | "multiply"
 ): Promise<void> {
   const response = await fetch(`http://3.34.19.176:8080/api/dorms/${dormId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ dormScore }),
+    body: JSON.stringify({ dormScore, operation }),
   });
 
   if (!response.ok) {

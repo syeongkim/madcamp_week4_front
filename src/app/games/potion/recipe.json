@@ -2,66 +2,92 @@
   {
     "name": "Polyjuice Potion",
     "ingredients": ["Horn of Bicorn", "Leech", "Fluxweed", "Boomslang skin"],
-    "effect": "Allows the drinker to assume the form of someone else"
+    "effect": "Allows the drinker to assume the form of someone else",
+    "target": "other",
+    "score": "*0.5"
   },
   {
     "name": "Felix Felicis",
     "ingredients": ["Squill bulb", "Ashwinder egg", "Occamy", "Murtlap Essence"],
-    "effect": "Brings good luck to the drinker"
+    "effect": "Brings good luck to the drinker",
+    "target": "self",
+    "score": "+50"
   },
   {
     "name": "Veritaserum",
     "ingredients": ["Ashwinder egg", "Unicorn hair", "Dittany", "Clabbert"],
-    "effect": "Forces the drinker to tell the truth"
+    "effect": "Forces the drinker to tell the truth",
+    "target": "other",
+    "score": "*0.5"
   },
   {
     "name": "Skele-Gro",
     "ingredients": ["Horn of Bicorn", "Mandrake", "Murtlap Essence"],
-    "effect": "Regrows bones"
+    "effect": "Regrows bones",
+    "target": "self",
+    "score": "+30"
   },
   {
     "name": "Draught of Living Death",
     "ingredients": ["Asphodel", "Wormwood", "Valerian root"],
-    "effect": "Puts the drinker into a deep sleep"
+    "effect": "Puts the drinker into a deep sleep",
+    "target": "self",
+    "score": "*0"
   },
   {
     "name": "Wiggenweld Potion",
     "ingredients": ["Asphodel", "Murtlap Essence", "Dragon liver"],
-    "effect": "Replenishes a person's stamina"
+    "effect": "Replenishes a person's stamina",
+    "target": "self",
+    "score": "+20"
   },
   {
     "name": "Cure for Boils",
     "ingredients": ["Flobberworm Mucus", "Dittany", "Nettle"],
-    "effect": "Cures boils"
+    "effect": "Cures boils",
+    "target": "self",
+    "score": "+20"
   },
   {
     "name": "Gillyweed Potion",
     "ingredients": ["Gillyweed", "Murtlap Essence", "Beetle"],
-    "effect": "Allows the drinker to breathe underwater"
+    "effect": "Allows the drinker to breathe underwater",
+    "target": "self",
+    "score": "+30"
   },
   {
     "name": "Essence of Comfrey",
     "ingredients": ["Comfrey", "Dragon liver", "Nettle"],
-    "effect": "Heals wounds"
+    "effect": "Heals wounds",
+    "target": "self",
+    "score": "+50"
   },
   {
     "name": "Mandrake Restorative Draught",
     "ingredients": ["Mandrake", "Valerian root", "Wormwood"],
-    "effect": "Restores those who have been petrified"
+    "effect": "Restores those who have been petrified",
+    "target": "self",
+    "score": "+50"
   },
   {
     "name": "Beautiflcation Potion",
     "ingredients": ["Rose Petal", "Moonstone", "Unicorn hair"],
-    "effect": "Makes the drinker beautiful"
+    "effect": "Makes the drinker beautiful",
+    "target": "self",
+    "score": "*2"
   },
   {
     "name": "Panacea",
     "ingredients": ["Sal Ammoniac", "Unicorn horn", "Dittany"],
-    "effect": "Cures all ailments"
+    "effect": "Cures all ailments",
+    "target": "self",
+    "score": "+100"
   },
   {
     "name": "Swelling Solution",
     "ingredients": ["Pufferfish eyes", "Dittany", "Nettle"],
-    "effect": "Causes the drinker to swell"
+    "effect": "Causes the drinker to swell",
+    "target": "other",
+    "score": "-70"
   }
 ]
