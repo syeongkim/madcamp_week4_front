@@ -71,14 +71,24 @@ const Potion: React.FC = () => {
         );
 
         // Convert the map to an array of objects with name, imageUrl, and stock
-        const potions = Object.entries(potionCountMap).map(
-          ([potion_name, stock]) => ({
-            name: potion_name,
-            imageUrl: `https://syeongkim.github.io/madcamp_week4_front/images/${potion_name}.webp`,
-            stock: Number(stock), // Cast stock to number
-          })
-        );
+        // const potions = Object.entries(potionCountMap).map(
+        //   ([potion_name, stock]) => ({
+        //     name: potion_name,
+        //     imageUrl: `https://syeongkim.github.io/madcamp_week4_front/images/${potion_name}.webp`,
+        //     stock: Number(stock), // Cast stock to number
+        //   })
+        // );
 
+        const potions = [{
+          name: 'Polyjuice Potion',
+          imageUrl: 'https://syeongkim.github.io/madcamp_week4_front/images/Polyjuice Potion.webp',
+          stock: 2
+        },
+        {
+          name: 'Skele-Gro',
+          imageUrl: 'https://syeongkim.github.io/madcamp_week4_front/images/Skele-Gro.webp',
+          stock: 1
+        }]
         setCreatedPotions(potions);
         setLoading(false);
       } catch (error) {
