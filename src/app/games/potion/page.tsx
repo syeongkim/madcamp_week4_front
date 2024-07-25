@@ -187,9 +187,8 @@ const Potion: React.FC = () => {
           setShowDormSelection(true); // 기숙사 선택 UI를 보여줍니다.
         } else {
           if (recipe.score.includes("*")) {
-            // 점수 곱하기 로직 추가
+            updateDormPoints(myDormId, parseFloat(recipe.score.replace("*", "")), "multiply");
           } else {
-            console.log("___", parseInt(recipe.score.replace("+", "")))
             updateDormPoints(myDormId, parseInt(recipe.score.replace("+", "")), "add");
           }
         }
@@ -215,7 +214,7 @@ const Potion: React.FC = () => {
       if (foundRecipe) {
         // 선택한 기숙사에 효과를 적용하는 로직 추가
         if (foundRecipe.score.includes("*")) {
-          // 점수 곱하기 로직 추가
+          updateDormPoints(dormId.toString(), parseFloat(foundRecipe.score.replace("*", "")), "multiply");
         } else {
           updateDormPoints(dormId.toString(), parseInt(foundRecipe.score.replace("+", "")), "add");
         }
