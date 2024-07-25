@@ -91,7 +91,7 @@ const Potion: React.FC = () => {
   //   fetchPotions();
   // }, []);
 
-  const potions = [{
+  const readypotions = [{
     name: 'Polyjuice Potion',
     imageUrl: 'https://syeongkim.github.io/madcamp_week4_front/images/Polyjuice Potion.webp',
     stock: 2
@@ -101,7 +101,7 @@ const Potion: React.FC = () => {
     imageUrl: 'https://syeongkim.github.io/madcamp_week4_front/images/Skele-Gro.webp',
     stock: 1
   }]
-  // setCreatedPotions(potions);
+
   const shelfPositions = [
     { top: "10%", left: "10%" },
     { top: "10%", left: "27%" },
@@ -503,7 +503,7 @@ const Potion: React.FC = () => {
 
               {/* Positioning the potions */}
               {!loading &&
-                potions.map((potion, index) => (
+                readypotions.map((potion, index) => (
                   <div
                     key={index}
                     className="absolute flex flex-col items-center justify-center w-24 h-24"
