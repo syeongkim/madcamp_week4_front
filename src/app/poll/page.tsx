@@ -137,6 +137,7 @@ export default function Poll() {
             counts[parseInt(a)] > counts[parseInt(b)] ? a : b
           );
           setMaxAnswerIndex(parseInt(maxAnswerIndex));
+          localStorage.setItem("userDormId", maxAnswerIndex);
           setFinalResult(
             `Your answers are processed. Most common answer index: ${maxAnswerIndex}`
           );
