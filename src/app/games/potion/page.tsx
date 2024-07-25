@@ -53,22 +53,22 @@ const Potion: React.FC = () => {
   useEffect(() => {
     const fetchPotions = async () => {
       try {
-        const dormId = parseInt(localStorage.getItem("dormId") ?? "");
-        const response = await fetch(
-          `https://hogwart.paulupa.com/api/potions/${dormId}`
-        ); // Replace '1' with the appropriate dormId
-        const data = await response.json();
+        // const dormId = parseInt(localStorage.getItem("dormId") ?? "");
+        // const response = await fetch(
+        //   `https://hogwart.paulupa.com/api/potions/${dormId}`
+        // ); // Replace '1' with the appropriate dormId
+        // const data = await response.json();
 
-        const potionCountMap = data.reduce(
-          (
-            acc: { [x: string]: any },
-            potion: { potion_name: string | number }
-          ) => {
-            acc[potion.potion_name] = (acc[potion.potion_name] || 0) + 1;
-            return acc;
-          },
-          {}
-        );
+        // const potionCountMap = data.reduce(
+        //   (
+        //     acc: { [x: string]: any },
+        //     potion: { potion_name: string | number }
+        //   ) => {
+        //     acc[potion.potion_name] = (acc[potion.potion_name] || 0) + 1;
+        //     return acc;
+        //   },
+        //   {}
+        // );
 
         // Convert the map to an array of objects with name, imageUrl, and stock
         // const potions = Object.entries(potionCountMap).map(
