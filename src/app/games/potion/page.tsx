@@ -258,10 +258,15 @@ const Potion: React.FC = () => {
     setResult(null);
   };
 
-  const handlePotionClick = (recipe: {
+  const handlePotionClick = async (recipe: {
     name: string;
     ingredients: string[];
   }) => {
+    const dormId = localStorage.getItem("userDormId");
+    if (dormId) {
+      console.log("minus credit")
+      await updateDormPoints(dormId, -10, "add");
+    }
     setSelectedPotion(recipe);
     setShowNewModal(true);
     setShowDropdown(false);
