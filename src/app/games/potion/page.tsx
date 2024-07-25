@@ -101,7 +101,7 @@ const Potion: React.FC = () => {
     imageUrl: 'https://syeongkim.github.io/madcamp_week4_front/images/Skele-Gro.webp',
     stock: 1
   }]
-  setCreatedPotions(potions);
+  // setCreatedPotions(potions);
   const shelfPositions = [
     { top: "10%", left: "10%" },
     { top: "10%", left: "27%" },
@@ -503,7 +503,7 @@ const Potion: React.FC = () => {
 
               {/* Positioning the potions */}
               {!loading &&
-                createdPotions.map((potion, index) => (
+                potions.map((potion, index) => (
                   <div
                     key={index}
                     className="absolute flex flex-col items-center justify-center w-24 h-24"
