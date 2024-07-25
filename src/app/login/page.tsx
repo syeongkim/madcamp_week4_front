@@ -1,38 +1,38 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import Link from "next/link";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
 import "./styles/login.css";
 
 export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (event: { preventDefault: () => void; }) => {
-    console.log('submit');
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    console.log("submit");
     event.preventDefault();
 
     try {
       // change to your server's URL
-      const res = await fetch('http://3.39.212.221:8080/api/users', {
-        mode: 'cors',
-        method: 'GET',
+      const res = await fetch("https://hogwart.paulupa.com/api/users", {
+        mode: "cors",
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        credentials: 'include',
-      }); 
-  
+        credentials: "include",
+      });
+
       console.log(res);
       const data = await res.json();
       console.log(data);
-  
+
       if (res.ok) {
         // 로그인 성공
-        window.location.href = '/dorms';
+        window.location.href = "/dorms";
       } else {
         // 로그인 실패
         setError(data.message);
@@ -50,7 +50,10 @@ export default function Login() {
         </div>
         <form onSubmit={handleSubmit} className="space-y-6 font-Animales">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-white"
+            >
               Username
             </label>
             <input
@@ -65,7 +68,10 @@ export default function Login() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-white"
+            >
               Password
             </label>
             <input
@@ -87,14 +93,20 @@ export default function Login() {
                 type="checkbox"
                 className="h-4 w-4 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label htmlFor="remember_me" className="ml-2 block text-sm text-white">
+              <label
+                htmlFor="remember_me"
+                className="ml-2 block text-sm text-white"
+              >
                 Remember me
               </label>
             </div>
           </div>
           {error && <div className="text-red-500 text-sm">{error}</div>}
           <div>
-            <Button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600">
+            <Button
+              type="submit"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600"
+            >
               Sign in
             </Button>
           </div>

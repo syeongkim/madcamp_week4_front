@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
 import { useState, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from "next/navigation";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
 import "./styles/signup.css"; // Tailwind CSS는 별도로 구성되어야 함
@@ -10,7 +10,7 @@ const dormMapping: { [key: string]: number } = {
   Gryffindor: 1,
   Hufflepuff: 2,
   Ravenclaw: 3,
-  Slytherin: 4
+  Slytherin: 4,
 };
 
 const SignUpComponent = () => {
@@ -25,7 +25,7 @@ const SignUpComponent = () => {
     setDorm(dorm || "");
   }, [searchParams]);
 
-  const handleSignUp = async (event: { preventDefault: () => void; }) => {
+  const handleSignUp = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
@@ -41,7 +41,7 @@ const SignUpComponent = () => {
 
     try {
       console.log("Creating user:", userData);
-      const response = await fetch("http://3.34.19.176:8080/api/users", {
+      const response = await fetch("https://hogwart.paulupa.com/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +72,10 @@ const SignUpComponent = () => {
         </div>
         <form className="space-y-6 font-Animales" onSubmit={handleSignUp}>
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-white"
+            >
               Username
             </label>
             <input
@@ -87,7 +90,10 @@ const SignUpComponent = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-white"
+            >
               Password
             </label>
             <input
@@ -102,7 +108,10 @@ const SignUpComponent = () => {
             />
           </div>
           <div>
-            <label htmlFor="confirm_password" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="confirm_password"
+              className="block text-sm font-medium text-white"
+            >
               Confirm Password
             </label>
             <input
@@ -117,8 +126,10 @@ const SignUpComponent = () => {
             />
           </div>
           <div>
-            <Button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600"
-              type="submit">
+            <Button
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600"
+              type="submit"
+            >
               Sign Up
             </Button>
           </div>
@@ -126,7 +137,7 @@ const SignUpComponent = () => {
       </div>
     </div>
   );
-}
+};
 
 const SignUp = () => {
   return (
@@ -134,6 +145,6 @@ const SignUp = () => {
       <SignUpComponent />
     </Suspense>
   );
-}
+};
 
 export default SignUp;
