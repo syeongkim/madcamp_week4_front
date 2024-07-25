@@ -15,6 +15,7 @@ const dormMapping: { [key: string]: number } = {
 };
 
 const SignUpComponent = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -55,6 +56,7 @@ const SignUpComponent = () => {
         console.log("User created successfully:", data);
         localStorage.setItem("username", username);
         localStorage.setItem("dormId", dormMapping[dorm].toString());
+        router.push(`dorms/${dorm.toLowerCase()}`);
       } else {
         const errorData = await response.json();
         console.error("Error creating user:", errorData);
@@ -125,16 +127,14 @@ const SignUpComponent = () => {
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
-          <div>
-            <Link href={`dorms/${dorm.toLowerCase()}`}>
-              <Button
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600"
-                type="submit"
-                onClick={() => handleSignUp}
-              >
-                Sign Up
-              </Button>
-            </Link>
+          <div style={{ width: "385px" }}>
+            <button
+              className="submit-button w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600"
+              type="submit"
+              onClick={() => handleSignUp}
+            >
+              Sign Up
+            </button>
           </div>
         </form>
       </div>
