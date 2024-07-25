@@ -54,7 +54,7 @@ const SignUpComponent = () => {
         const data = await response.json();
         console.log("User created successfully:", data);
         localStorage.setItem("username", username);
-        localStorage.setItem("userDormId", dormMapping[dorm].toString());
+        localStorage.setItem("dormId", dormMapping[dorm].toString());
       } else {
         const errorData = await response.json();
         console.error("Error creating user:", errorData);
