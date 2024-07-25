@@ -15,8 +15,13 @@ const Gryffindor: React.FC = () => {
     const fetchDetails = async () => {
       try {
         const response = await fetch(
-            `https://hogwart.paulupa.com/api/dorms/1`
+            `https://hogwart.paulupa.com/api/dorms/1`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
             ); // Replace '1' with the appropriate dormId
+          console.log(response);
           const data = await response.json();
           console.log(data);
           setDetails({
