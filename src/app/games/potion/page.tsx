@@ -502,8 +502,7 @@ const Potion: React.FC = () => {
               {/* <h2 className="fixed-title text-4xl text-white font-Harry">Potion Case</h2> */}
 
               {/* Positioning the potions */}
-              {!loading &&
-                readypotions.map((potion, index) => (
+              {readypotions.map((potion, index) => (
                   <div
                     key={index}
                     className="absolute flex flex-col items-center justify-center w-24 h-24"
