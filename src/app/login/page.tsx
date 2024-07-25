@@ -48,7 +48,7 @@ export default function Login() {
         <div className="mb-6 text-center">
           <Logo />
         </div>
-        <form onSubmit={handleSubmit} className="space-y-6 font-Animales">
+        <form className="space-y-6 font-Animales">
           <div>
             <label
               htmlFor="username"
