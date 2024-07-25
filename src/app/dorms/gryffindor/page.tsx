@@ -13,14 +13,19 @@ const Gryffindor: React.FC = () => {
 
   useEffect(() => {
     const fetchDetails = async () => {
-      const response = await fetch(
-        `https://hogwart.paulupa.com/api/dorms/1`
-        ); // Replace '1' with the appropriate dormId
-      const data = await response.json();
-      setDetails({
-        points: data.dorm_score || 0,
-        students: data.students || [],
-      });
+      try {
+        const response = await fetch(
+            `https://hogwart.paulupa.com/api/dorms/1`
+            ); // Replace '1' with the appropriate dormId
+          const data = await response.json();
+          console.log(data);
+          setDetails({
+            points: data.dorm_score || 0,
+            students: data.students || [],
+          });
+      } catch (e) {
+        console.log(e);
+      }
     };
 
     fetchDetails();
