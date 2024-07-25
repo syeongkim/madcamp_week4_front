@@ -277,7 +277,7 @@ const Potion: React.FC = () => {
     const dormId = localStorage.getItem("dormId");
     if (dormId) {
       console.log("minus credit")
-      await updateDormPoints(dormId, -10, "add");
+      // await updateDormPoints(dormId, -10, "add");
     }
     setSelectedPotion(recipe);
     setShowNewModal(true);
