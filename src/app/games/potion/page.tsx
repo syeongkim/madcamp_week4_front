@@ -7,6 +7,7 @@ import "./styles/potion.css";
 import Dropdown from "../../components/Dropdown";
 import Image from "../../components/Image";
 import { updateDormPoints } from "../../services/DormsService";
+import classNames from 'classnames';
 
 interface Recipe {
   name: string;
@@ -42,12 +43,18 @@ const Potion: React.FC = () => {
   const [showDormSelection, setShowDormSelection] = useState(false); // 기숙사 선택 UI를 보여줄지 여부를 저장할 상태
   const [foundRecipe, setFoundRecipe] = useState<Recipe | null>(null); // foundRecipe를 상태로 저장
   const dorms = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]; // 예시 기숙사 목록
+  const dormHoverColors: { [key: string]: string } = {
+    Gryffindor: 'hover:text-red-700',
+    Hufflepuff: 'hover:text-yellow-700',
+    Ravenclaw: 'hover:text-blue-800',
+    Slytherin: 'hover:text-green-700',
+  };
 
   useEffect(() => {
     const fetchPotions = async () => {
       try {
         const dormId = localStorage.getItem("dormId");
-        const response = await fetch(`http://3.34.19.176:8080/api/potions/${dormId}`); // Replace '1' with the appropriate dormId
+        const response = await fetch(`http://localhost:8080/api/potions/${dormId}`); // Replace '1' with the appropriate dormId
         const data = await response.json();
 
         const potionCountMap = data.reduce(
@@ -180,26 +187,35 @@ const Potion: React.FC = () => {
       } catch (error) {
         console.error("Error adding potion:", error);
       }
-
-      const myDormId = localStorage.getItem("dormId") ?? "";
-      try {
-        if (recipe.target === "other") {
-          setShowDormSelection(true); // 기숙사 선택 UI를 보여줍니다.
-        } else {
-          if (recipe.score.includes("*")) {
-            updateDormPoints(myDormId, parseFloat(recipe.score.replace("*", "")), "multiply");
-          } else {
-            updateDormPoints(myDormId, parseInt(recipe.score.replace("+", "")), "add");
-          }
-        }
-      } catch (e) {
-        console.error("Error updating points:", e);
-      }
     } else {
       setResult("Wrong combination, try again!");
     }
   };
-  
+
+  const showEffect = (potionName: string) => {
+    setShowDetailModal(false);
+    const myDormId = localStorage.getItem("dormId") ?? "";
+    const potion = recipes.find((recipe) => recipe.name === potionName);
+
+    try {
+      if (potion && potion.target === "other") {
+        console.log("here");
+        setShowDormSelection(true); // 기숙사 선택 UI를 보여줍니다.
+      } else {
+        if (potion && potion.score.includes("*")) {
+          updateDormPoints(myDormId, parseFloat(potion.score.replace("*", "")), "multiply");
+        } else {
+          if (potion) {
+            updateDormPoints(myDormId, parseInt(potion.score.replace("+", "")), "add");
+          }
+        }
+      }
+      setSelectedIngredients([]);
+      setResult(null);
+    } catch (e) {
+      console.error("Error updating points:", e);
+    }
+  }
   // 기숙사 선택 후 효과를 적용하는 함수
   const applyEffectToDorm = async (dorm: string) => {
     const dormMapping: { [key: string]: number } = {
@@ -211,12 +227,15 @@ const Potion: React.FC = () => {
 
     const dormId = dormMapping[dorm];
     try {
-      if (foundRecipe) {
+      if (selectedDetailPotion) {
+        const potion = recipes.find((recipe) => recipe.name === selectedDetailPotion.name);
         // 선택한 기숙사에 효과를 적용하는 로직 추가
-        if (foundRecipe.score.includes("*")) {
-          updateDormPoints(dormId.toString(), parseFloat(foundRecipe.score.replace("*", "")), "multiply");
+        if (potion && potion.score.includes("*")) {
+          updateDormPoints(dormId.toString(), parseFloat(potion.score.replace("*", "")), "multiply");
         } else {
-          updateDormPoints(dormId.toString(), parseInt(foundRecipe.score.replace("+", "")), "add");
+          if (potion) {
+            updateDormPoints(dormId.toString(), parseInt(potion.score.replace("+", "")), "add");
+          }
         }
         setShowDormSelection(false); // 기숙사 선택 UI를 숨깁니다.
       }
@@ -224,7 +243,7 @@ const Potion: React.FC = () => {
       console.error("Error applying effect to dorm:", e);
     }
   };
-  
+
   const resetSelection = () => {
     setSelectedIngredients([]);
     setResult(null);
@@ -318,18 +337,36 @@ const Potion: React.FC = () => {
           </button>
         </div>
         {result && (
-          <div className="text-center mt-4">
-            <h2 className="text-3xl font-bold text-black font-Animales">
+          <div className="result-modal text-center mt-4 flex flex-col items-center justify-center">
+            <h2 className="text-3xl font-bold text-white font-Animales mb-4">
               {result}
             </h2>
+            {result && (
+              <button
+                className="mt-2 px-4 py-2 text-white rounded-lg font-Animales block"
+                onClick={resetSelection}
+              >
+                Try Again
+              </button>
+            )}
+            {/* {result.toLowerCase().includes("wrong") && (
+              <button
+                className="mt-2 px-4 py-2 text-white rounded-lg font-Animales block"
+                onClick={resetSelection}
+              >
+                Try Again
+              </button>
+            )} ? (
             <button
-              className="mt-2 px-4 py-2 text-white rounded-lg font-Animales"
-              onClick={resetSelection}
+              className="mt-2 px-4 py-2 text-white rounded-lg font-Animales block"
+              onClick={showEffect}
             >
-              Try Again
+              Show Effect
             </button>
+            ) */}
           </div>
         )}
+
       </div>
       <div className="fixed top-0 right-0 p-4 flex flex-col">
         <button
@@ -497,18 +534,32 @@ const Potion: React.FC = () => {
             <p className="text-black text-2xl">
               Stock: {selectedDetailPotion.stock}
             </p>
+            <button className="text-black" onClick={() => showEffect(selectedDetailPotion.name)}>
+              Apply Effect
+            </button>
           </div>
         </div>
       )}
 
       {showDormSelection && (
-        <div className="text-white">
-          <h3>Select a dorm to apply the effect:</h3>
-          {dorms.map((dorm) => (
-            <button key={dorm} onClick={() => applyEffectToDorm(dorm)}>
-              {dorm}
-            </button>
-          ))}
+        <div className="new-modal fixed inset-0 flex items-center justify-center z-50 bg-opacity-50">
+          <div className="text-white p-6 rounded-lg shadow-lg text-center font-Animales">
+            <h3 className="text-2xl mb-4">Select a dorm to apply the effect</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {dorms.map((dorm) => (
+                <button
+                  key={dorm}
+                  onClick={() => applyEffectToDorm(dorm)}
+                  className={classNames(
+                    'text-white font-bold py-2 px-4 rounded transition duration-200 transform hover:scale-105',
+                    dormHoverColors[dorm]
+                  )}
+                >
+                  {dorm}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>
