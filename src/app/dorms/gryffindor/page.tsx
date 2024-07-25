@@ -23,7 +23,7 @@ const Gryffindor: React.FC = () => {
       // }
       setDetails({
         points: 500,
-        students: ["Harry Potter", "Hermione Granger", "Ron Weasley", "Steven Cho", "Ashley Kang"],
+        students: ["Harry Potter", "Hermione Granger", "Ron Weasley", "Steven Cho", "Ashley Kang", "Admin"],
       });
     };
 
