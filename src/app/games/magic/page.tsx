@@ -109,11 +109,11 @@ const Magic: React.FC = () => {
             await updateDormPoints(dormId, randomPoints, "add");
           } catch (error) {
             console.error("Failed to update dorm points:", error);
-            setFeedback("Correct! But failed to update points.");
+            setFeedback("Correct!");
           }
         } else {
           console.error("No dormId found in local storage");
-          setFeedback("Correct, but no dorm ID found.");
+          setFeedback("Correct!");
         }
       } else {
         setFeedback("Incorrect. Try again!");
