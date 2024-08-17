@@ -1,6 +1,7 @@
 # Harry Potter
 
 해리포터의, 해리포터 덕후들에 의한, 해리포터 덕후들을 위한 웹사이트
+<br><br>
 
 ## 개발 환경
 
@@ -9,12 +10,13 @@
 - **DB:** MySQL
 - **Server:** AWS(EC2, RDS, S3)
 - **Deploy:** github (github action, github page)
+<br><br>
 
 ## 팀원
 
 - 김민경
 - 김서영
-
+<br><br>
 
 ## 기능
 
@@ -36,10 +38,11 @@
 ### 4️⃣ Quidditch Game
 
 - 해리포터 영화에 등장하는 퀴디치를 1인모드로 즐길 수 있는 게임
+<br><br>
 
 ## Technical Issues
 
-[BE]
+### [BE]
 
 사실 이번 주차에 이것저것 시도한 것은 참 많았으나.. 성공하지 못한 것이 대부분입니다… ㅠㅠ
 
@@ -68,13 +71,13 @@
     → 로컬이 아닌 ec2 환경에서도 .pem 파일 필요 ⇒ S3를 통해 ec2에 저장
     
 
-[FE]
+### [FE]
 
-[배포]
+**[배포]**
 
 1. github pages를 처음 접해봐서 yml 파일 작성의 어려움
 2. github pages가 https로 배포되기에, 백엔드 코드도 https로 배포했어야 했음 → domain을 하나 발급받아  프론트, 백 모두 https로 배포 완료
 
-[Next.js]
+**[Next.js]**
 
 1. server component와 client component를 분리하지 않아 build error 다수 발생
