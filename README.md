@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Harry Potter
 
-## Getting Started
+해리포터의, 해리포터 덕후들에 의한, 해리포터 덕후들을 위한 웹사이트
 
-First, run the development server:
+## 개발 환경
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **FrontEnd**: Next.js + Tailwind CSS
+- **BackEnd:** Node.js(Express.js)
+- **DB:** MySQL
+- **Server:** AWS(EC2, RDS, S3)
+- **Deploy:** github (github action, github page)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 팀원
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 김민경
+- 김서영
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## 기능
 
-To learn more about Next.js, take a look at the following resources:
+***BGM을 함께 즐겨주세요!***
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1️⃣ 기숙사 배정 후 회원가입
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- 사용자의 성향을 파악할 수 있는 간단한 질문들을 통해 기숙사 배정
 
-## Deploy on Vercel
+### 2️⃣ Potion Game
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 해리포터 영화에 등장하는 마법약들을 만드는 게임
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 3️⃣ Magic Game
+
+- 해리포터 영화에 등장하는 주문들을 맞추는 게임
+- 음성인식 가능
+
+### 4️⃣ Quidditch Game
+
+- 해리포터 영화에 등장하는 퀴디치를 1인모드로 즐길 수 있는 게임
+
+## Technical Issues
+
+[BE]
+
+사실 이번 주차에 이것저것 시도한 것은 참 많았으나.. 성공하지 못한 것이 대부분입니다… ㅠㅠ
+
+1. docker를 이용하여 container 단위로 백엔드 프로젝트를 ec2 프리 티어 요금제에 직접 빌드하려 시도
+    
+    → 용량 부족으로 인해 빌드 불가
+    
+    → github action을 이용하여 docker container 및 docker images를 올리는 선택지 중
+    
+    후자를 선택하여 용량 부족 문제를 해결함
+    
+2. 코드를 수정했으나, docker container에 수정사항이 어느 시점부터 반영되지 않는 문제 발생
+    
+    → 아직 원인 파악 불가, 이때부터 docker 포기(ㅠㅠ)
+    
+3. spring boot 빌드 시도
+    
+    → 마찬가지로 용량 부족으로 인해 빌드 불가
+    
+    → memory swapping을 통해 실제 사용 가능한 메모리의 크기를 늘리는 선택지가 있긴 했으나, 남은 시간을 계산했을 때 spring boot 대신(ㅠㅠ) nodejs(expressjs)를 채택하여 사용
+    
+4. RDS, EC2 연결이 안됨
+    
+    → standard tcp/ip OVER SSH 방식으로 연결
+    
+    → 로컬이 아닌 ec2 환경에서도 .pem 파일 필요 ⇒ S3를 통해 ec2에 저장
+    
+
+[FE]
+
+[배포]
+
+1. github pages를 처음 접해봐서 yml 파일 작성의 어려움
+2. github pages가 https로 배포되기에, 백엔드 코드도 https로 배포했어야 했음 → domain을 하나 발급받아  프론트, 백 모두 https로 배포 완료
+
+[Next.js]
+
+1. server component와 client component를 분리하지 않아 build error 다수 발생
