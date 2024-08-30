@@ -1,48 +1,93 @@
-# Harry Potter
+## Harry Potter
+
+---
 
 해리포터의, 해리포터 덕후들에 의한, 해리포터 덕후들을 위한 웹사이트
-<br><br>
 
-## 개발 환경
+### 개발 환경
 
 - **FrontEnd**: Next.js + Tailwind CSS
 - **BackEnd:** Node.js(Express.js)
 - **DB:** MySQL
-- **Server:** AWS(EC2, RDS, S3)
-- **Deploy:** github (github action, github page)
-<br><br>
+- AWS(EC2, RDS, S3)
+- github (github action, github page)
 
-## 팀원
+### **팀원**
 
-- 김민경
-- 김서영
-<br><br>
+[김민경](https://www.notion.so/439129a8943d46b7930bef080691544a?pvs=21)
 
-## 기능
+[kim-minkyoung - Overview](https://github.com/kim-minkyoung)
+
+[김서영](https://www.notion.so/311946d346434147a28e847dd315b320?pvs=21)
+
+[syeongkim - Overview](https://github.com/syeongkim)
+
+### 기능
 
 ***BGM을 함께 즐겨주세요!***
 
-### 1️⃣ 기숙사 배정 후 회원가입
+### 1. 기숙사 배정 후 회원가입
+
+
+
+https://github.com/user-attachments/assets/0ea1d418-268c-47c6-a30c-545a3a1eb6ac
+
+
 
 - 사용자의 성향을 파악할 수 있는 간단한 질문들을 통해 기숙사 배정
 
-### 2️⃣ Potion Game
+
+
+https://github.com/user-attachments/assets/c0bee319-62a9-49bf-8ba7-674457f92050
+
+
+
+- 배정 후 아이디와 비밀번호를 통해 회원 가입
+
+### 2. Dormitory Page
+
+
+
+https://github.com/user-attachments/assets/2e8a5fa7-cea7-40d8-be0c-e78a11e9655c
+
+
+
+- 각 기숙사에 대한 페이지를 확인 가능
+
+### 3. Potion Game
+
+
+
+https://github.com/user-attachments/assets/da3d33a5-dc55-4f6a-83a5-6ed49e1dee97
+
+
 
 - 해리포터 영화에 등장하는 마법약들을 만드는 게임
 
-### 3️⃣ Magic Game
+### 4. Magic Game
+
+
+
+https://github.com/user-attachments/assets/514ac8e8-6aaa-489e-a159-d49c24f4d20b
+
+
 
 - 해리포터 영화에 등장하는 주문들을 맞추는 게임
 - 음성인식 가능
 
-### 4️⃣ Quidditch Game
+### 5. Quidditch Game
+
+
+
+https://github.com/user-attachments/assets/c604351d-dc44-499f-9862-d15fec7ad5f2
+
+
 
 - 해리포터 영화에 등장하는 퀴디치를 1인모드로 즐길 수 있는 게임
-<br><br>
 
 ## Technical Issues
 
-### [BE]
+[BE]
 
 사실 이번 주차에 이것저것 시도한 것은 참 많았으나.. 성공하지 못한 것이 대부분입니다… ㅠㅠ
 
@@ -71,13 +116,13 @@
     → 로컬이 아닌 ec2 환경에서도 .pem 파일 필요 ⇒ S3를 통해 ec2에 저장
     
 
-### [FE]
+[FE]
 
-**[배포]**
+[배포]
 
 1. github pages를 처음 접해봐서 yml 파일 작성의 어려움
 2. github pages가 https로 배포되기에, 백엔드 코드도 https로 배포했어야 했음 → domain을 하나 발급받아  프론트, 백 모두 https로 배포 완료
 
-**[Next.js]**
+[Next.js]
 
 1. server component와 client component를 분리하지 않아 build error 다수 발생
